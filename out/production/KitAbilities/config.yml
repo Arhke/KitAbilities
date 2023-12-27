@@ -1,0 +1,106 @@
+Commands:
+  Ability:
+    Help:
+      - 'Stuff idk do whatever'
+    List:
+      Permission: "ability.list"
+      SuccessHeader: "&6=====<Valid Abilities>====="
+      SuccessContent: "&6{0}"
+    NoAbilityFound: "&cThere isn't an ability called {0}"
+    Permission: "ability.{0}"
+    NoAbilityPerm: "&cSorry, you don't have permission to use that kit. You need ability.{0} permission to claim that kit"
+    NoInventorySpace: "&cPlease free Up some space in your inventory to claim this ability."
+    Success: "&aKit {0} claimed"
+  Armor:
+    Help:
+      - "Try EVERYTHING!!!"
+    Create:
+      Permission: "armor.create"
+      IncorrectArgs: "&cIncorrect Number of arguments: /armor create <name> Or /armor create <name> <Upgrade>"
+      UpgradeNotFound: "&cUpgrade {0} was not found, Defaulting to No Upgrade"
+    Delete:
+      Permission: "armor.delete"
+      IncorrectArgs: "&cIncorrect Number of arguments: /armor create <name> Or /armor create <name> <Upgrade>"
+    List:
+      Permission: "armor.list"
+      SuccessHeader: "&6======<Valid ArmorSets>======"
+      SuccessContent: "&6{0}"
+    Upgrades:
+      Permission: "armor.upgrades"
+      SuccessHeader: "&6======<Valid Upgrades>======"
+      SuccessContent: "&b{0}"
+    NoArmorFound: "&cKit {0} was not found"
+    Permission: "armor.{0}"
+    NoArmorPerm: "&cYou need armor.{0} perms to claim this kit"
+    Success: "&aClaimed Kit {0}"
+  Weapon:
+    Help:
+      - "I dont know anymore"
+    NotPlayer: "&cYou must be player to run this command."
+    Create:
+      Permission: "weapon.create"
+      InvalidItem: "&cPlease Hold Something in your hand to create a weapon entry."
+      AlreadyExists: "&cA Weapon Entry with that name already exists"
+      UpgradeNotFound: "&cThe Specified Upgrade was not found, defaulting to no upgrade."
+      Success: "&aSuccessfully created a weapon kit named {0}"
+    Delete:
+      Permission: "weapon.delete"
+      IncorrectArgs: "&cIncorrect Number of Arguments, the correct usage is /weapon delete <name>"
+      EntryNotFound: "&cSpecified Entry was not found. Please Try again"
+      Success: "&aSuccessfully deleted the weapon entry named {0}"
+    List:
+      Permission: "weapon.list"
+      SuccessHeader: "&6======<Weapon Entries>======"
+      SuccessContent: "&b{0}"
+    EntryNotFound: "&cThe Specified Weapon Entry was not found. Please try again"
+    ClaimPermission: "weapon.{0}"
+    InsufficientPerms: "&cYou don't have sufficient perms to claim that kit."
+    NoInventorySpace: "&cYou don't have enough space in your inventory to claim that kit."
+    Success: "&aYou Claimed the Weapon Kit {0}"
+Messages:
+  NoPermission: "&cYou don't have sufficient permission ({0}) to perform that operation"
+  Listeners:
+    NoThrowAbility: "&cYou can't throw Ability Items out of your inventory"
+    CantUseCrafting: "&cNope, Can't Use that here, Sorry"
+    CantCraft: "&cWould Be Nice No? Too bad you can't"
+    GainStack: "&7Your {0}&r&7 gained a Stack"
+    ArmorUpgrade: "&bThat Item has been Upgraded"
+    MaxStacks: "&aMax stacks!, separate ability"
+    LoreMaxStacks: "&4&lMaxStacks"
+    LoreStacks: "&4{0} stacks"
+Abilities:
+  Atom:
+    Material:
+    Name:
+    Lore:
+      - "stufftest"
+  Blaze:
+    Material:
+    Name:
+    Lore:
+      - "stufftest"
+  Cliff:
+    Material:
+    Name:
+    Lore:
+      - "stufftest"
+  Dodge:
+    Material:
+    Name:
+    Lore:
+      - "stufftest"
+  Rage:
+    Material:
+    Name:
+    Lore:
+      - "stufftest"
+  Reflector:
+    Material:
+    Name:
+    Lore:
+      - "stufftest"
+  Untarget:
+    Material:
+    Name:
+    Lore:
+      - "stufftest"
