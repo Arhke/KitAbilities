@@ -1,10 +1,10 @@
 package net.waterraid.KitAbilities.Armor;
 
-import com.Arhke.ArhkeLib.Lib.CustomEvents.ArmorEquipEvent;
+import com.Arhke.ArhkeLib.Lib.Base.Base;
+import com.Arhke.ArhkeLib.Lib.CustomEvents.ArmorEquipEvent1_8;
 import com.Arhke.ArhkeLib.Lib.CustomEvents.ArmorType;
 import com.Arhke.ArhkeLib.Lib.FileIO.DataManager;
 import de.tr7zw.nbtapi.NBTItem;
-import net.waterraid.KitAbilities.Utils.Base;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -78,7 +78,7 @@ public class Armor extends Base {
     public void putArmorOnPlayer(Player player) {
         for(int i = 0; i < _armor.length; i++){
 
-            ArmorEquipEvent aee = new ArmorEquipEvent(player, ArmorEquipEvent.EquipMethod.DRAG, ArmorType.matchSlot(i), player.getInventory().getArmorContents()[i], _armor[i]);
+            ArmorEquipEvent1_8 aee = new ArmorEquipEvent1_8(player, ArmorEquipEvent1_8.EquipMethod.DRAG, ArmorType.matchSlot(i), player.getInventory().getArmorContents()[i], _armor[i]);
             Bukkit.getServer().getPluginManager().callEvent(aee);
             if(aee.isCancelled()){
                 return;
@@ -94,7 +94,7 @@ public class Armor extends Base {
             if(is == null || is.getType() == Material.AIR){
                 continue;
             }
-            addItemtoPlayer(player, is);
+            Base.addItemToPlayer(player, is);
         }
         putArmorOnPlayer(player);
 

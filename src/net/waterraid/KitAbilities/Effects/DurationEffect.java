@@ -4,11 +4,13 @@ import net.waterraid.KitAbilities.Main;
 import net.waterraid.KitAbilities.Managers.PlayerData;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
 import java.util.*;
+
+import static net.waterraid.KitAbilities.Abilities.Clone.secondsToTicks;
+import static net.waterraid.KitAbilities.Main.getPlugin;
 
 public abstract class DurationEffect extends Effect {
     protected int duration;

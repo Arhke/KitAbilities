@@ -3,7 +3,6 @@ package net.waterraid.KitAbilities.Abilities.Templates;
 import net.waterraid.KitAbilities.Abilities.*;
 import net.waterraid.KitAbilities.Main;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 import java.lang.reflect.InvocationTargetException;
 

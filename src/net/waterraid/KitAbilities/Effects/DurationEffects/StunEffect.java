@@ -9,6 +9,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
+import static net.waterraid.KitAbilities.Main.getPlugin;
+
 public class StunEffect extends DurationEffect {
 
 

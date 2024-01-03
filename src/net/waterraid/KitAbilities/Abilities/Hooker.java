@@ -1,9 +1,9 @@
 package net.waterraid.KitAbilities.Abilities;
 
+import com.Arhke.ArhkeLib.Lib.Base.Base;
 import net.minecraft.server.v1_8_R3.EnumParticle;
 import net.minecraft.server.v1_8_R3.PacketPlayOutWorldParticles;
 import net.waterraid.KitAbilities.Abilities.Templates.Abilities;
-import net.waterraid.KitAbilities.Effects.DurationEffects.AntiSprintEffect;
 import net.waterraid.KitAbilities.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -18,6 +18,8 @@ import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
+
+import static net.waterraid.KitAbilities.Main.getPlugin;
 
 public class Hooker extends Abilities {
     {
@@ -84,7 +86,7 @@ public class Hooker extends Abilities {
             Vector v = new Vector(x, y, z);
             v.normalize();
             v.multiply(-1.3);
-            trueDamage(event.getPlayer(), player, 2);
+            Base.trueDamage(event.getPlayer(), player, 2);
             Location loc = player.getLocation();
             PacketPlayOutWorldParticles packet = new PacketPlayOutWorldParticles(EnumParticle.SMOKE_NORMAL, false, (float) (loc.getX()), (float) (loc.getY()), (float) loc.getZ(), 0.5f, 0.0f, 0.5f, 0, 200);
             new BukkitRunnable() {

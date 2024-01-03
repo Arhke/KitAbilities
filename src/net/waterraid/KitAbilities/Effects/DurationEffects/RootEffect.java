@@ -4,7 +4,6 @@ import net.waterraid.KitAbilities.Effects.DurationEffect;
 import net.waterraid.KitAbilities.Main;
 import net.waterraid.KitAbilities.Managers.PlayerData;
 import net.waterraid.KitAbilities.Utils.AbilityCastEvent;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -13,6 +12,9 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
+
+import static net.waterraid.KitAbilities.Abilities.Clone.secondsToTicks;
+import static net.waterraid.KitAbilities.Main.getPlugin;
 
 public class RootEffect extends DurationEffect {
 
@@ -62,7 +64,7 @@ public class RootEffect extends DurationEffect {
             @Override
             public void run() {
                 if(!e.isDead() && e.isOnline()) e.setVelocity(new Vector(0, 0, 0));}
-        }.runTaskLater(Main.getPlugin(), 0L);
+        }.runTaskLater(getPlugin(), 0L);
     }
 
 

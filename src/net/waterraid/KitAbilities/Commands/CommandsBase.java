@@ -2,7 +2,6 @@ package net.waterraid.KitAbilities.Commands;
 
 
 import net.waterraid.KitAbilities.Main;
-import net.waterraid.KitAbilities.Utils.MainBase;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
@@ -13,7 +12,9 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public abstract class CommandsBase extends MainBase implements CommandExecutor {
+import static net.waterraid.KitAbilities.Main.getPlugin;
+
+public abstract class CommandsBase implements CommandExecutor {
     private String _commandName;
     protected String[] _helpString;
 
@@ -21,7 +22,6 @@ public abstract class CommandsBase extends MainBase implements CommandExecutor {
         this(Instance, null);
     }
     public CommandsBase(Main Instance, String[] HelpString) {
-        super(Instance);
         _commandName = this.getClass().getSimpleName().toLowerCase().replace("command", "");
         _helpString = new String[]{ChatColor.RED + "[Error] Unknown SubCommand Please Type /" + getCmd() + " Help or Plugin Documentation."};
         _helpString = HelpString == null? _helpString: helpBuilder(HelpString);

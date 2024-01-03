@@ -1,7 +1,6 @@
 package net.waterraid.KitAbilities.Effects.DurationEffects;
 
 import net.waterraid.KitAbilities.Effects.DurationEffect;
-import net.waterraid.KitAbilities.Effects.Effect;
 import net.waterraid.KitAbilities.Main;
 import net.waterraid.KitAbilities.Managers.PlayerData;
 import org.bukkit.Bukkit;

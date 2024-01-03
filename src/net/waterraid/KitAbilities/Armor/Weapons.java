@@ -1,11 +1,10 @@
 package net.waterraid.KitAbilities.Armor;
 
+import com.Arhke.ArhkeLib.Lib.FileIO.DataManager;
 import de.tr7zw.nbtapi.NBTItem;
-import net.waterraid.KitAbilities.FileIO.DataManager;
-import net.waterraid.KitAbilities.Utils.Base;
 import org.bukkit.inventory.ItemStack;
 
-public class Weapons extends Base {
+public class Weapons {
     String _id;
     ItemStack _weapon;
     public static final String NBTIWeapon = "WeaponId";

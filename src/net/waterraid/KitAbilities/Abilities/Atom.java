@@ -9,6 +9,10 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 
+import static com.Arhke.ArhkeLib.Lib.Base.Base.trueDamage;
+import static net.waterraid.KitAbilities.Abilities.Clone.isTargeteableLivingEntity;
+import static net.waterraid.KitAbilities.Main.getPlugin;
+
 public class Atom extends RightClickAbilities {
     {
        setUpAbilityAndItem(5, 0, Material.RECORD_12);

@@ -1,10 +1,7 @@
 package net.waterraid.KitAbilities.Abilities.Templates;
 
 import net.waterraid.KitAbilities.Main;
-import org.bukkit.Material;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerFishEvent;
 
 public abstract class FishingRodAbilityKits extends Abilities{

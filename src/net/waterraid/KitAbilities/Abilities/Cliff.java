@@ -14,6 +14,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
+import static net.waterraid.KitAbilities.Abilities.Clone.isTargeteableLivingEntity;
+import static net.waterraid.KitAbilities.Main.getPlugin;
+
 public class Cliff extends OnHitAbilities {
     {
         setUpAbilityAndItem(8, 0, Material.BONE);

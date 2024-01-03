@@ -1,20 +1,18 @@
 package net.waterraid.KitAbilities.Abilities;
 
+import com.Arhke.ArhkeLib.Lib.Utils.Directions.Direction3D;
 import net.waterraid.KitAbilities.Abilities.Templates.Abilities;
-import net.waterraid.KitAbilities.Abilities.Templates.RightClickAbilities;
 import net.waterraid.KitAbilities.Main;
-import net.waterraid.KitAbilities.Utils.Direction3D;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.block.Block;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.util.Vector;
 
-import java.util.HashSet;
+import static net.waterraid.KitAbilities.Abilities.Clone.isInProtectedRegion;
 
 public class Phase extends Abilities {
     {
@@ -24,6 +22,7 @@ public class Phase extends Abilities {
     public Phase(Main instance, Player player) {
         super(instance, player);
     }
+
 
     @Override
     public void onEvent(PlayerInteractEvent event) {

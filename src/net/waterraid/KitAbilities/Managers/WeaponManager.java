@@ -1,21 +1,19 @@
 package net.waterraid.KitAbilities.Managers;
 
+import com.Arhke.ArhkeLib.Lib.FileIO.DataManager;
+import com.Arhke.ArhkeLib.Lib.FileIO.FileManager;
 import net.waterraid.KitAbilities.Armor.Weapons;
-import net.waterraid.KitAbilities.FileIO.DataManager;
-import net.waterraid.KitAbilities.FileIO.FileManager;
 import net.waterraid.KitAbilities.Main;
-import net.waterraid.KitAbilities.Utils.MainBase;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public class WeaponManager extends MainBase {
+public class WeaponManager  {
     DataManager _dm;
     FileManager _fm;
     Map<String, Weapons> _weapons = new HashMap<String, Weapons>();
     public WeaponManager(Main instance, FileManager fm, DataManager dm){
-        super(instance);
         _dm = dm;
         _fm = fm;
         for(String key:dm.getConfig().getKeys(false)){

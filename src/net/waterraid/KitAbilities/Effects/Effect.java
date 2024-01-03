@@ -4,20 +4,13 @@ import net.waterraid.KitAbilities.Main;
 import net.waterraid.KitAbilities.Managers.PlayerData;
 import net.waterraid.KitAbilities.Utils.AbilityCastEvent;
 import net.waterraid.KitAbilities.Utils.ArrowHitPlayerEvent;
-import net.waterraid.KitAbilities.Utils.MainBase;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.*;
 import org.bukkit.event.player.*;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitTask;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import static net.waterraid.KitAbilities.Main.getPlugin;
 
-public abstract class Effect extends MainBase {
+public abstract class Effect {
     protected Player _target;
     protected Player _from;
     protected PlayerData _targetData;
@@ -25,12 +18,10 @@ public abstract class Effect extends MainBase {
 
 
     public Effect(Main instance, Player target){
-        super(instance);
         _target = target;
         _targetData = getPlugin().getPDManager().getOrNewData(_target.getUniqueId());
     }
     public Effect(Main instance, Player target, PlayerData targetData){
-        super(instance);
         _target = target;
         _targetData = targetData;
     }

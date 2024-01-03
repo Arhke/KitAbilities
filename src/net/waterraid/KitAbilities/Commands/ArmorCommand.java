@@ -1,7 +1,7 @@
 package net.waterraid.KitAbilities.Commands;
 
 import net.waterraid.KitAbilities.Armor.Armor;
-import net.waterraid.KitAbilities.FileIO.DataManager;
+import com.Arhke.ArhkeLib.Lib.FileIO.DataManager;
 import net.waterraid.KitAbilities.Main;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -12,8 +12,17 @@ import org.bukkit.entity.Player;
 import java.util.Collection;
 import java.util.List;
 
+import static com.Arhke.ArhkeLib.Lib.Base.Base.tcm;
+import static net.waterraid.KitAbilities.Main.getPlugin;
+
 public class ArmorCommand extends CommandsBase implements CommandExecutor {
     DataManager _config;
+    public static boolean checkPerm(CommandSender player, String string){
+        return player.hasPermission(string);
+    }
+    public static boolean checkPermNoMsg(CommandSender player, String string){
+        return checkPerm(player, string);
+    }
     public ArmorCommand(Main instance){
         super(instance, new String[] {
                 "/armor - Displays this msg",
@@ -59,7 +68,6 @@ public class ArmorCommand extends CommandsBase implements CommandExecutor {
                     player.sendMessage(tcm(_config.getString("List", "SuccessHeader")));
                     for(Armor ak: aks){
                         player.sendMessage(tcm(_config.getString("List", "SuccessContent"), ak.getId()));
-                        System.out.println("Aa");
                     }
                 }
             }

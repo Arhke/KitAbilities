@@ -1,7 +1,7 @@
 package net.waterraid.KitAbilities.Managers;
 
-import net.waterraid.KitAbilities.FileIO.DataManager;
-import net.waterraid.KitAbilities.FileIO.FileManager;
+import com.Arhke.ArhkeLib.Lib.FileIO.DataManager;
+import com.Arhke.ArhkeLib.Lib.FileIO.FileManager;
 import net.waterraid.KitAbilities.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

@@ -1,7 +1,7 @@
 package net.waterraid.KitAbilities.Commands;
 
 import net.waterraid.KitAbilities.Armor.Weapons;
-import net.waterraid.KitAbilities.FileIO.DataManager;
+import com.Arhke.ArhkeLib.Lib.FileIO.DataManager;
 import net.waterraid.KitAbilities.Main;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -9,6 +9,11 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+
+import static com.Arhke.ArhkeLib.Lib.Base.Base.tcm;
+import static net.waterraid.KitAbilities.Commands.ArmorCommand.checkPerm;
+import static net.waterraid.KitAbilities.Commands.ArmorCommand.checkPermNoMsg;
+import static net.waterraid.KitAbilities.Main.getPlugin;
 
 public class WeaponCommand extends CommandsBase implements CommandExecutor {
     DataManager _config;

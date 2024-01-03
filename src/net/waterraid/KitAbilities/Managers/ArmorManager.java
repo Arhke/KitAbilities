@@ -1,11 +1,10 @@
 package net.waterraid.KitAbilities.Managers;
 
+import com.Arhke.ArhkeLib.Lib.Base.MainBase;
 import net.waterraid.KitAbilities.Armor.Armor;
-import net.waterraid.KitAbilities.FileIO.DataManager;
-import net.waterraid.KitAbilities.FileIO.FileManager;
+import com.Arhke.ArhkeLib.Lib.FileIO.DataManager;
+import com.Arhke.ArhkeLib.Lib.FileIO.FileManager;
 import net.waterraid.KitAbilities.Main;
-import net.waterraid.KitAbilities.Utils.MainBase;
-
 import java.util.HashMap;
 import java.util.Map;
 

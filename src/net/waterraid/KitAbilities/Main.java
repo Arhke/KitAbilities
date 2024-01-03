@@ -1,10 +1,10 @@
 package net.waterraid.KitAbilities;
 
 import com.Arhke.ArhkeLib.Lib.Base.PluginBase;
+import com.Arhke.ArhkeLib.Lib.FileIO.DataManager;
+import com.Arhke.ArhkeLib.Lib.FileIO.FileManager;
 import com.Arhke.ArhkeLib.Lib.Hook.Plugins;
 import net.waterraid.KitAbilities.Commands.*;
-import net.waterraid.KitAbilities.FileIO.DataManager;
-import net.waterraid.KitAbilities.FileIO.FileManager;
 import net.waterraid.KitAbilities.Managers.ArmorManager;
 import net.waterraid.KitAbilities.Managers.PlayerDataManager;
 import net.waterraid.KitAbilities.Managers.WeaponManager;
@@ -13,6 +13,8 @@ import org.bukkit.ChatColor;
 
 import java.io.File;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main extends PluginBase {
     /**
@@ -26,31 +28,27 @@ public class Main extends PluginBase {
      */
     static Main _plugin;
     ArmorManager _armorManager;
-    PlayerDataManager _pdManager;
+    PlayerDataManager pdManager;
     WeaponManager _weaponManager;
 
     private File _configFile, _dataFile;
     DataManager _config;
 
     String ArmorKey = "ArmorMap", PlayerDataKey = "DataMap", WeaponKey = "WeaponMap";
-    public static Listeners listen;
     @Override
     public void onEnable() {
         _plugin = this;
 
         registerConfigLoader(ConfigFiles.class);
         //Initialize File Paths
-        _configFile = Paths.get(getDataFolder().toString(), "config.yml").toFile();
         _dataFile = Paths.get(getDataFolder().toString(), "data.yml").toFile();
 
         //initialize config
-        saveResource(_configFile.getName(), false);
-        _config = new FileManager(_configFile).getDataManager();
         FileManager data = new FileManager(_dataFile);
 
 
         _armorManager = new ArmorManager(this, data, data.getDataManager().getDataManager(ArmorKey));
-        _pdManager = new PlayerDataManager(this, data, data.getDataManager().getDataManager(PlayerDataKey));
+        pdManager = new PlayerDataManager(this, data, data.getDataManager().getDataManager(PlayerDataKey));
         _weaponManager = new WeaponManager(this, data, data.getDataManager().getDataManager(WeaponKey));
         CommandsBase armor = new ArmorCommand(this),
                 effects = new EffectsCommand(this), pf = new PotionFillCommand(this), weapon = new WeaponCommand(this);
@@ -62,15 +60,15 @@ public class Main extends PluginBase {
         getCommand(pf.getCmd()).setExecutor(pf);
         getCommand("pf").setExecutor(pf);
         getCommand(weapon.getCmd()).setExecutor(weapon);
-        Bukkit.getPluginManager().registerEvents(listen = new Listeners(this), this);
+        Bukkit.getPluginManager().registerEvents(new Listeners(getConfigManager().getDataManager("Messages", "Listeners"), pdManager), this);
         registerHooks(Plugins.PLACEHOLDERAPI, Plugins.VAULT);
-        registerCustomEvents();
+        registerCustomEvents(8);
         getHook().registerPlaceholderAPI("ABILITY", (p, s)-> getPlugin().getPDManager().getData(p.getUniqueId()).getAbilityKit().getItemStack().getItemMeta().getDisplayName() + " " + ChatColor.GRAY);
 
     }
     @Override
     public void onDisable() {
-        _pdManager.unregisterAll();
+        pdManager.unregisterAll();
         deleteDirectory(Paths.get(getDataFolder().getParentFile().toString(), "MythicMobs", "SavedData").toFile());
     }
     boolean deleteDirectory(File directoryToBeDeleted) {
@@ -86,7 +84,7 @@ public class Main extends PluginBase {
         return _armorManager;
     }
     public PlayerDataManager getPDManager() {
-        return _pdManager;
+        return pdManager;
     }
     public WeaponManager getWeaponManager() {
         return _weaponManager;
@@ -99,5 +97,9 @@ public class Main extends PluginBase {
     //todo
     public static Main getPlugin(){
         return _plugin;
+    }
+    public static void main(String[] args){
+        List<String> test = new ArrayList<>();
+        test.toArray(new String[0]);
     }
 }

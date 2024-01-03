@@ -1,12 +1,7 @@
 package net.waterraid.KitAbilities.Utils;
 
-import com.sun.javaws.exceptions.InvalidArgumentException;
 import de.tr7zw.nbtapi.NBTItem;
-import net.royawesome.jlibnoise.module.combiner.Max;
-import net.waterraid.KitAbilities.Armor.Armor;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Sound;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 

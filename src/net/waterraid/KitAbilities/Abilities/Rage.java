@@ -7,6 +7,8 @@ import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
+import static net.waterraid.KitAbilities.Main.getPlugin;
+
 public class Rage extends RightClickAbilities {
     {
         setUpAbilityAndItem(15, 5, Material.FLINT_AND_STEEL);

@@ -12,6 +12,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionType;
 
+import static com.Arhke.ArhkeLib.Lib.Base.Base.tcm;
+import static net.waterraid.KitAbilities.Main.getPlugin;
+
 public class PotionFillCommand extends CommandsBase implements CommandExecutor {
     public static ItemStack SplashHeal;
 
@@ -48,11 +51,11 @@ public class PotionFillCommand extends CommandsBase implements CommandExecutor {
                 PlayerData pd = getPlugin().getPDManager().getOrNewData(player.getUniqueId());
                 if (pd._remove) {
                     pd._remove = false;
-                    player.sendMessage(translateColorCodes("&7You have turned Quick Claim &a&lOn." +
+                    player.sendMessage(tcm("&7You have turned Quick Claim &a&lOn." +
                             "\n&6Right Click to Quick Claim, Shift + Right CLick to Normal Claim"));
                 } else {
                     pd._remove = true;
-                    player.sendMessage(translateColorCodes("&7You have turned Quick Claim &l&cOff." +
+                    player.sendMessage(tcm("&7You have turned Quick Claim &l&cOff." +
                             "\n&6Right Click to Normal Claim, Shift + Right CLick to Quick Claim"));
                 }
                 return true;

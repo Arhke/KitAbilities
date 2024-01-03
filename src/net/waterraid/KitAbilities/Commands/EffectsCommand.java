@@ -10,6 +10,8 @@ import org.bukkit.entity.Player;
 
 import java.lang.reflect.InvocationTargetException;
 
+import static net.waterraid.KitAbilities.Main.getPlugin;
+
 public class EffectsCommand extends CommandsBase implements CommandExecutor {
     public EffectsCommand(Main instance){
         super(instance);

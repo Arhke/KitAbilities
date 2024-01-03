@@ -1,15 +1,16 @@
 package net.waterraid.KitAbilities.Commands.AbilityCommands;
 
+import com.Arhke.ArhkeLib.Lib.Base.CommandsBase;
 import com.Arhke.ArhkeLib.Lib.Base.SubCommandsBase;
-import com.Arhke.ArhkeLib.Lib.FileIO.DataManager;
-import com.Arhke.ArhkeLib.Lib.Utils.HelpMessage;
 import net.waterraid.KitAbilities.Abilities.Templates.EnumAbilities;
-import net.waterraid.KitAbilities.Main;
 import org.bukkit.entity.Player;
 
-public class ListCommand extends SubCommandsBase<Main> {
-    public ListCommand(Main instance, DataManager dm) {
-        super(instance, "list", dm);
+import static com.Arhke.ArhkeLib.Lib.Base.Base.tcm;
+
+public class ListCommand extends SubCommandsBase {
+
+    public ListCommand(CommandsBase cb, String commandName) {
+        super(cb, commandName);
     }
 
     @Override
@@ -17,10 +18,6 @@ public class ListCommand extends SubCommandsBase<Main> {
         return CommandType.PLAYER;
     }
 
-    @Override
-    public HelpMessage[] getHelpMessage() {
-        return new HelpMessage[0];
-    }
 
     @Override
     public boolean run(String[] strings, Player player) {

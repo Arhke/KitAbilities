@@ -6,12 +6,8 @@ import org.bukkit.entity.Fish;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerFishEvent;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 @SuppressWarnings("unused")
 public class LavaFishingHook extends EntityFishingHook {

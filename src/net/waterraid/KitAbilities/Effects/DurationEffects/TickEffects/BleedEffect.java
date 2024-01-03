@@ -1,18 +1,9 @@
 package net.waterraid.KitAbilities.Effects.DurationEffects.TickEffects;
 
-import net.minecraft.server.v1_8_R3.EnumParticle;
-import net.minecraft.server.v1_8_R3.PacketPlayOutWorldParticles;
-import net.waterraid.KitAbilities.Effects.Effect;
 import net.waterraid.KitAbilities.Main;
 import net.waterraid.KitAbilities.Managers.PlayerData;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Sound;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitTask;
 
 public class BleedEffect extends TickEffect {
 

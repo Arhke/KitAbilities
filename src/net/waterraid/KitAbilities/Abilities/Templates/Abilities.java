@@ -6,13 +6,11 @@ import net.waterraid.KitAbilities.ConfigFiles;
 import net.waterraid.KitAbilities.Main;
 import net.waterraid.KitAbilities.Utils.AbilityCastEvent;
 import net.waterraid.KitAbilities.Utils.ArrowHitPlayerEvent;
-import net.waterraid.KitAbilities.Utils.MainBase;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Event;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
@@ -26,11 +24,15 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-public abstract class Abilities extends MainBase {
+import static com.Arhke.ArhkeLib.Lib.Base.Base.roundInt;
+import static com.Arhke.ArhkeLib.Lib.Base.Base.tcm;
+import static net.waterraid.KitAbilities.Abilities.Clone.isTargeteableLivingEntity;
+import static net.waterraid.KitAbilities.Abilities.Clone.isInProtectedRegion;
+import static net.waterraid.KitAbilities.Main.getPlugin;
+
+public abstract class Abilities {
     protected Player _player;
     protected ItemStack _is;
     protected String _id = getClass().getSimpleName().toUpperCase();
@@ -41,7 +43,6 @@ public abstract class Abilities extends MainBase {
     public static final String NBTIAbility = "AbilityId";
     public static final String NameKey = "Name", MaterialKey = "Material", LoreKey = "Lore";
     public Abilities(Main instance, Player player){
-        super(instance);
         _player = player;
     }
     //=========Events========
@@ -192,7 +193,7 @@ public abstract class Abilities extends MainBase {
             getPlayer().setExp(0);
             return;
         }
-        int cd = round((_cdTimeStamp-System.currentTimeMillis())/1000d);
+        int cd = roundInt((_cdTimeStamp-System.currentTimeMillis())/1000d);
         _cdTask = new BukkitRunnable() {
             int i = 0;
             @Override

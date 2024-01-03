@@ -9,6 +9,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import static net.waterraid.KitAbilities.Abilities.Clone.secondsToTicks;
+
 public class GroundEffect extends DurationEffect {
 
     public GroundEffect(Main instance, Player target, double duration) {

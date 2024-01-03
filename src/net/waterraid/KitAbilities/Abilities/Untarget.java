@@ -7,6 +7,8 @@ import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
+import static net.waterraid.KitAbilities.Main.getPlugin;
+
 public class Untarget extends RightClickAbilities {
     {
         setUpAbilityAndItem(15, 2, Material.FERMENTED_SPIDER_EYE);

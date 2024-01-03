@@ -1,9 +1,10 @@
 package net.waterraid.KitAbilities;
 
-import com.Arhke.ArhkeLib.Lib.CustomEvents.ArmorEquipEvent;
+import com.Arhke.ArhkeLib.Lib.Base.Base;
+import com.Arhke.ArhkeLib.Lib.CustomEvents.ArmorEquipEvent1_8;
 import com.Arhke.ArhkeLib.Lib.CustomEvents.ArmorType;
+import com.Arhke.ArhkeLib.Lib.CustomEvents.TrueDamageEvent;
 import com.Arhke.ArhkeLib.Lib.FileIO.DataManager;
-import com.Arhke.ArhkeLib.Lib.GUI.InventoryGui;
 import com.sk89q.worldguard.bukkit.WGBukkit;
 import de.tr7zw.nbtapi.NBTItem;
 import io.lumine.xikage.mythicmobs.MythicMobs;
@@ -21,6 +22,7 @@ import net.waterraid.KitAbilities.Commands.PotionFillCommand;
 import net.waterraid.KitAbilities.Effects.DurationEffect;
 import net.waterraid.KitAbilities.LavaFishing.LavaFishingHook;
 import net.waterraid.KitAbilities.Managers.PlayerData;
+import net.waterraid.KitAbilities.Managers.PlayerDataManager;
 import net.waterraid.KitAbilities.Utils.*;
 import org.bukkit.*;
 import org.bukkit.craftbukkit.v1_8_R3.CraftServer;
@@ -40,7 +42,6 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.event.weather.WeatherChangeEvent;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.PluginManager;
@@ -49,24 +50,24 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.projectiles.ProjectileSource;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
-
+import static com.Arhke.ArhkeLib.Lib.Base.Base.tcm;
 import java.util.*;
 
 @SuppressWarnings("unused")
-public class Listeners extends MainBase implements Listener {
-    DataManager _config;
+public class Listeners implements Listener {
+    DataManager config;
+    PlayerDataManager pdManager;
     //(range: 0.0 - 4.0)
     final double speed = 1.0;
     HashMap<UUID, Inventory> deathLootMap = new HashMap<>();
-    public Listeners(Main instance) {
-        super(instance);
-        _config = getPlugin().getConfigManager().getDataManager("Messages", "Listeners");
+    public Listeners(DataManager dm, PlayerDataManager pdManager) {
+        config = dm;
     }
 
     @EventHandler
     public void onThrowStuff(PlayerDropItemEvent event) {
         if (isAbility(event.getItemDrop().getItemStack())) {
-            event.getPlayer().sendMessage(tcm(_config.getString("NoThrowAbility")));
+            event.getPlayer().sendMessage(Base.tcm(config.getString("NoThrowAbility")));
             event.setCancelled(true);
             return;
         }
@@ -89,7 +90,7 @@ public class Listeners extends MainBase implements Listener {
                 event.getEntity().spigot().respawn();
                 event.getEntity().setExp(0);
             }
-        }.runTaskLater(getPlugin(), 10L);
+        }.runTaskLater(Main.getPlugin(), 10L);
         new BukkitRunnable(){
             @Override
             public void run(){
@@ -98,12 +99,12 @@ public class Listeners extends MainBase implements Listener {
                 }
                 Shared.getPlayer(event.getEntity().getUniqueId()).detectBossBarsAndSend();
             }
-        }.runTaskLater(getPlugin(), 13L);
+        }.runTaskLater(Main.getPlugin(), 13L);
         Inventory inv = Bukkit.createInventory(null, 6 * 9, tcm("{0}'s Death Loot", event.getEntity().getDisplayName()));
         event.getDrops().stream().filter((a)->!a.isSimilar(PotionFillCommand.SplashHeal) && !isAbility(a))
                 .forEach(inv::addItem);
         event.getDrops().clear();
-        PlayerData pd = getPlugin().getPDManager().getOrNewData(event.getEntity().getUniqueId());
+        PlayerData pd = Main.getPlugin().getPDManager().getOrNewData(event.getEntity().getUniqueId());
         Iterator<DurationEffect> iEffects = pd.getEffectIterator();
         while (iEffects.hasNext()) {
             DurationEffect effects = iEffects.next();
@@ -122,7 +123,7 @@ public class Listeners extends MainBase implements Listener {
             event.getEntity().getKiller().sendMessage(tcm("&f&m>-------------&a &c[&dKitpvp &8* &c]&a &f&m-------------<"));
             event.getEntity().getKiller().sendMessage("");
             event.getEntity().getKiller().sendMessage(tcm("&7You have killed &a{0} {1}", event.getEntity().getName(), "[View Inventory]"));
-            pd = getPlugin().getPDManager().getOrNewData(event.getEntity().getKiller().getUniqueId());
+            pd = Main.getPlugin().getPDManager().getOrNewData(event.getEntity().getKiller().getUniqueId());
             iEffects = pd.getEffectIterator();
             while (iEffects.hasNext()) {
                 DurationEffect effects = iEffects.next();
@@ -135,7 +136,7 @@ public class Listeners extends MainBase implements Listener {
             Set<SetBonus> bonuses = SetBonus.parsePlayer(event.getEntity().getKiller());
             PluginManager pm = Bukkit.getPluginManager();
             if(bonuses.contains(SetBonus.MONOPOLY)){
-                getPlugin().getHook().depositMoney(event.getEntity().getKiller(), 5d);
+                Main.getPlugin().getHook().depositMoney(event.getEntity().getKiller(), 5d);
             }
             upgradeArmor(event.getEntity().getKiller());
             event.getEntity().getKiller().sendMessage("");
@@ -147,7 +148,7 @@ public class Listeners extends MainBase implements Listener {
             event.getEntity().sendMessage("");
             event.getEntity().sendMessage(tcm("&f&m>-----------------------------------<"));
         }
-        getPlugin().getPDManager().deathPlayer(event.getEntity().getUniqueId());
+        Main.getPlugin().getPDManager().deathPlayer(event.getEntity().getUniqueId());
     }
 
     @EventHandler
@@ -190,10 +191,10 @@ public class Listeners extends MainBase implements Listener {
     public void onInteract(PlayerInteractEvent event) {
         if (event.getAction() == Action.RIGHT_CLICK_BLOCK && (event.getClickedBlock().getType() == Material.ANVIL
                 || event.getClickedBlock().getType() == Material.FURNACE || event.getClickedBlock().getType() == Material.BURNING_FURNACE)) {
-            event.getPlayer().sendMessage(tcm(_config.getString("CantUseCrafting")));
+            event.getPlayer().sendMessage(tcm(config.getString("CantUseCrafting")));
             event.setCancelled(true);
         }
-        PlayerData pd = getPlugin().getPDManager().getOrNewData(event.getPlayer().getUniqueId());
+        PlayerData pd = Main.getPlugin().getPDManager().getOrNewData(event.getPlayer().getUniqueId());
         Iterator<DurationEffect> iterator = pd.getEffectIterator();
         while (iterator.hasNext()) {
             DurationEffect effects = iterator.next();
@@ -206,7 +207,7 @@ public class Listeners extends MainBase implements Listener {
     }
 
     @EventHandler(ignoreCancelled = true)
-    public void onEquip(ArmorEquipEvent event){
+    public void onEquip(ArmorEquipEvent1_8 event){
         System.out.println("Caught " + event.getPlayer());
         if(event.getType() == null)return;
         HashSet<SetBonus> oldbonuses = new HashSet<>(), newbonuses = new HashSet<>();
@@ -241,7 +242,7 @@ public class Listeners extends MainBase implements Listener {
             event.setDamage(event.getDamage()*50);
         }
 
-        PlayerData pd = getPlugin().getPDManager().getOrNewData(player.getUniqueId());
+        PlayerData pd = Main.getPlugin().getPDManager().getOrNewData(player.getUniqueId());
         Iterator<DurationEffect> iEffects = pd.getEffectIterator();
         while (iEffects.hasNext()) {
             DurationEffect effects = iEffects.next();
@@ -259,58 +260,56 @@ public class Listeners extends MainBase implements Listener {
 
         if (event.getEntity() instanceof Player) {
             Player player = (Player) event.getEntity();
-            PlayerData pd = getPlugin().getPDManager().getData(event.getEntity().getUniqueId());
-            if(!event.isCancelled()) {
-                Attributes.CustomAttributes aca;
+            PlayerData pd = Main.getPlugin().getPDManager().getData(event.getEntity().getUniqueId());
+            Attributes.CustomAttributes aca;
+            if (event.getDamager() instanceof Arrow) {
+                aca = Attributes.CustomAttributes.DEFLECT;
+            } else {
+                aca = Attributes.CustomAttributes.DODGE;
+            }
+            double ret = 1;
+            double defense = 1;
+            for (ItemStack is : ((Player) event.getEntity()).getInventory().getArmorContents()) {
+                if (is != null && is.getType() != Material.AIR) {
+                    ArmorAccessories aa = ArmorAccessories.parseCustom(is);
+                    ret *= Math.max(0,(1-aa.getCustomAttr().getOrDefault(aca, 0)/100d));
+                    defense *= (1-aa.getCustomAttr().getOrDefault(Attributes.CustomAttributes.DEFENSE, 0)/100d);
+                }
+            }
+            if (Math.random() > ret) {
+                Location loc = player.getLocation();
                 if (event.getDamager() instanceof Arrow) {
-                    aca = Attributes.CustomAttributes.DEFLECT;
+                    event.getDamager().remove();
+                    player.playSound(player.getLocation(), Sound.ANVIL_LAND, 3, 3);
+                    ProjectileSource ps = ((Arrow) event.getDamager()).getShooter();
+                    if (ps instanceof CraftPlayer) {
+                        ((CraftPlayer) ps).playSound(((Player)ps).getLocation(), Sound.ANVIL_LAND, 3, 3);
+                    }
+                    PacketPlayOutWorldParticles packet = new PacketPlayOutWorldParticles(EnumParticle.SNOWBALL, false, (float) (loc.getX()), (float) (loc.getY()), (float) loc.getZ(), 0.2f, 0.2f, 0.2f, 0, 200);
+                    for (Player online : Bukkit.getOnlinePlayers()) {
+                        if (!online.getUniqueId().equals(player.getUniqueId()))
+                            ((CraftPlayer) online).getHandle().playerConnection.sendPacket(packet);
+                    }
                 } else {
-                    aca = Attributes.CustomAttributes.DODGE;
-                }
-                double ret = 1;
-                double defense = 1;
-                for (ItemStack is : ((Player) event.getEntity()).getInventory().getArmorContents()) {
-                    if (is != null && is.getType() != Material.AIR) {
-                        ArmorAccessories aa = ArmorAccessories.parseCustom(is);
-                        ret *= Math.max(0,(1-aa.getCustomAttr().getOrDefault(aca, 0)/100d));
-                        defense *= (1-aa.getCustomAttr().getOrDefault(Attributes.CustomAttributes.DEFENSE, 0)/100d);
+                    Location loc1 = event.getDamager().getLocation(), loc2 = event.getEntity().getLocation();
+                    Vector oldV = new Vector(loc1.getX()-loc2.getX(),loc1.getY()-loc2.getY(),loc1.getZ()-loc2.getZ());
+                    Vector v = new Vector(-oldV.getZ(), 0 , oldV.getX());
+                    v.normalize().multiply(2.6 * (Base.randInt(2)-0.5));
+                    v.setY(0.1);
+                    player.setVelocity(v);
+                    player.playSound(player.getLocation(), Sound.ENDERDRAGON_WINGS, 3, 3);
+                    if (event.getDamager() instanceof Player) {
+                        ((Player) event.getDamager()).playSound(player.getLocation(), Sound.ENDERDRAGON_WINGS, 3, 3);
+                    }
+                    PacketPlayOutWorldParticles packet = new PacketPlayOutWorldParticles(EnumParticle.CLOUD, false, (float) (loc.getX()), (float) (loc.getY()), (float) loc.getZ(), 0.2f, 0.1f, 0.2f, 0, 200);
+                    for (Player online : Bukkit.getOnlinePlayers()) {
+                        if (!online.getUniqueId().equals(player.getUniqueId()))
+                            ((CraftPlayer) online).getHandle().playerConnection.sendPacket(packet);
                     }
                 }
-                if (Math.random() > ret) {
-                    Location loc = player.getLocation();
-                    if (event.getDamager() instanceof Arrow) {
-                        event.getDamager().remove();
-                        player.playSound(player.getLocation(), Sound.ANVIL_LAND, 3, 3);
-                        ProjectileSource ps = ((Arrow) event.getDamager()).getShooter();
-                        if (ps instanceof CraftPlayer) {
-                            ((CraftPlayer) ps).playSound(((Player)ps).getLocation(), Sound.ANVIL_LAND, 3, 3);
-                        }
-                        PacketPlayOutWorldParticles packet = new PacketPlayOutWorldParticles(EnumParticle.SNOWBALL, false, (float) (loc.getX()), (float) (loc.getY()), (float) loc.getZ(), 0.2f, 0.2f, 0.2f, 0, 200);
-                        for (Player online : Bukkit.getOnlinePlayers()) {
-                            if (!online.getUniqueId().equals(player.getUniqueId()))
-                                ((CraftPlayer) online).getHandle().playerConnection.sendPacket(packet);
-                        }
-                    } else {
-                        Location loc1 = event.getDamager().getLocation(), loc2 = event.getEntity().getLocation();
-                        Vector oldV = new Vector(loc1.getX()-loc2.getX(),loc1.getY()-loc2.getY(),loc1.getZ()-loc2.getZ());
-                        Vector v = new Vector(-oldV.getZ(), 0 , oldV.getX());
-                        v.normalize().multiply(2.6 * (randInt(2)-0.5));
-                        v.setY(0.1);
-                        player.setVelocity(v);
-                        player.playSound(player.getLocation(), Sound.ENDERDRAGON_WINGS, 3, 3);
-                        if (event.getDamager() instanceof Player) {
-                            ((Player) event.getDamager()).playSound(player.getLocation(), Sound.ENDERDRAGON_WINGS, 3, 3);
-                        }
-                        PacketPlayOutWorldParticles packet = new PacketPlayOutWorldParticles(EnumParticle.CLOUD, false, (float) (loc.getX()), (float) (loc.getY()), (float) loc.getZ(), 0.2f, 0.1f, 0.2f, 0, 200);
-                        for (Player online : Bukkit.getOnlinePlayers()) {
-                            if (!online.getUniqueId().equals(player.getUniqueId()))
-                                ((CraftPlayer) online).getHandle().playerConnection.sendPacket(packet);
-                        }
-                    }
-                    event.setCancelled(true);
-                } else {
-                    event.setDamage(Math.max(event.getDamage()*0.2, event.getDamage()*defense));
-                }
+                event.setCancelled(true);
+            } else {
+                event.setDamage(Math.max(event.getDamage()*0.2, event.getDamage()*defense));
             }
             if(SetBonus.parsePlayer((Player) event.getEntity()).contains(SetBonus.SHIELDING) && pd.shieldingCD < System.currentTimeMillis()){
                 pd.shieldingCD = System.currentTimeMillis()+ 5000;
@@ -323,7 +322,7 @@ public class Listeners extends MainBase implements Listener {
                     if (effects.isExpired()) iterator.remove();
                     else effects.onEvent(event);
                 }
-                if (pd.getAbilityKit() != null && !event.isCancelled()) {
+                if (pd.getAbilityKit() != null) {
                     pd.getAbilityKit().onEvent(event);
                 }
             }
@@ -340,7 +339,7 @@ public class Listeners extends MainBase implements Listener {
 
 
 
-            PlayerData pd = getPlugin().getPDManager().getData(event.getDamager().getUniqueId());
+            PlayerData pd = Main.getPlugin().getPDManager().getData(event.getDamager().getUniqueId());
             if (pd != null) {
                 Iterator<DurationEffect> iterator = pd.getEffectIterator();
                 while (iterator.hasNext()) {
@@ -348,46 +347,44 @@ public class Listeners extends MainBase implements Listener {
                     if (effects.isExpired()) iterator.remove();
                     else effects.onEvent(event);
                 }
-                if (pd.getAbilityKit() != null && !event.isCancelled()) pd.getAbilityKit().onEvent(event);
+                if (pd.getAbilityKit() != null) pd.getAbilityKit().onEvent(event);
             }
-            if(!event.isCancelled()){
-                Set<SetBonus> bonuses = SetBonus.parsePlayer(player);
-                PluginManager pm = Bukkit.getPluginManager();
-                if(bonuses.contains(SetBonus.VAMPIRE)){
-                    EntityRegainHealthEvent ere = new EntityRegainHealthEvent(player,1d, EntityRegainHealthEvent.RegainReason.CUSTOM);
-                    pm.callEvent(ere);
-                    if(!ere.isCancelled())
+            Set<SetBonus> bonuses = SetBonus.parsePlayer(player);
+            PluginManager pm = Bukkit.getPluginManager();
+            if(bonuses.contains(SetBonus.VAMPIRE)){
+                EntityRegainHealthEvent ere = new EntityRegainHealthEvent(player,1d, EntityRegainHealthEvent.RegainReason.CUSTOM);
+                pm.callEvent(ere);
+                if(!ere.isCancelled())
+                player.setHealth(Math.min(ere.getAmount() + player.getHealth(), player.getMaxHealth()));
+            }
+            if(bonuses.contains(SetBonus.LIFESTEAL)){
+                EntityRegainHealthEvent ere = new EntityRegainHealthEvent(player,event.getFinalDamage(), EntityRegainHealthEvent.RegainReason.CUSTOM);
+                pm.callEvent(ere);
+                if(!ere.isCancelled())
                     player.setHealth(Math.min(ere.getAmount() + player.getHealth(), player.getMaxHealth()));
-                }
-                if(bonuses.contains(SetBonus.LIFESTEAL)){
-                    EntityRegainHealthEvent ere = new EntityRegainHealthEvent(player,event.getFinalDamage(), EntityRegainHealthEvent.RegainReason.CUSTOM);
-                    pm.callEvent(ere);
-                    if(!ere.isCancelled())
-                        player.setHealth(Math.min(ere.getAmount() + player.getHealth(), player.getMaxHealth()));
-                }
-                if(bonuses.contains(SetBonus.POISONOUS) && event.getEntity() instanceof LivingEntity){
-                    LivingEntity le = (LivingEntity) event.getEntity();
-                    le.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 60, 1, false, false));
-                }
-                if(bonuses.contains(SetBonus.VENOMOUS) && event.getEntity() instanceof LivingEntity){
-                    LivingEntity le = (LivingEntity) event.getEntity();
-                    le.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 60, 2, false, false));
-                }
-                if(bonuses.contains(SetBonus.WITHERING) && event.getEntity() instanceof LivingEntity){
-                    LivingEntity le = (LivingEntity) event.getEntity();
-                    le.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 60, 1, false, false));
-                }
-                if(bonuses.contains(SetBonus.DECAYING) && event.getEntity() instanceof LivingEntity){
-                    LivingEntity le = (LivingEntity) event.getEntity();
-                    le.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 60, 2, false, false));
-                }
-                if(bonuses.contains(SetBonus.FEVERISH) && event.getEntity() instanceof LivingEntity){
-                    LivingEntity le = (LivingEntity) event.getEntity();
-                    le.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 120, 2, false, false));
-                }if(bonuses.contains(SetBonus.DAZZLING) && event.getEntity() instanceof LivingEntity){
-                    LivingEntity le = (LivingEntity) event.getEntity();
-                    le.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 60, 2, false, false));
-                }
+            }
+            if(bonuses.contains(SetBonus.POISONOUS) && event.getEntity() instanceof LivingEntity){
+                LivingEntity le = (LivingEntity) event.getEntity();
+                le.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 60, 1, false, false));
+            }
+            if(bonuses.contains(SetBonus.VENOMOUS) && event.getEntity() instanceof LivingEntity){
+                LivingEntity le = (LivingEntity) event.getEntity();
+                le.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 60, 2, false, false));
+            }
+            if(bonuses.contains(SetBonus.WITHERING) && event.getEntity() instanceof LivingEntity){
+                LivingEntity le = (LivingEntity) event.getEntity();
+                le.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 60, 1, false, false));
+            }
+            if(bonuses.contains(SetBonus.DECAYING) && event.getEntity() instanceof LivingEntity){
+                LivingEntity le = (LivingEntity) event.getEntity();
+                le.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 60, 2, false, false));
+            }
+            if(bonuses.contains(SetBonus.FEVERISH) && event.getEntity() instanceof LivingEntity){
+                LivingEntity le = (LivingEntity) event.getEntity();
+                le.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 120, 2, false, false));
+            }if(bonuses.contains(SetBonus.DAZZLING) && event.getEntity() instanceof LivingEntity){
+                LivingEntity le = (LivingEntity) event.getEntity();
+                le.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 60, 2, false, false));
             }
 
         }
@@ -405,28 +402,26 @@ public class Listeners extends MainBase implements Listener {
                 if (event.getEntity() instanceof Player) {
                     ArrowHitPlayerEvent ahpe;
                     Bukkit.getPluginManager().callEvent(
-                            ahpe = new ArrowHitPlayerEvent(((CraftPlayer) ps).getPlayer(), (Player) event.getEntity(), (Arrow) event.getDamager(), event.getDamage(), event.getFinalDamage(), event.isCancelled()));
+                            ahpe = new ArrowHitPlayerEvent(((CraftPlayer) ps).getPlayer(), (Player) event.getEntity(), (Arrow) event.getDamager(), event.getDamage(), event.getFinalDamage(), false));
                     event.setCancelled(ahpe.isCancelled());
 
 
                 }
-                if(!event.isCancelled()) {
-                    Player player = (CraftPlayer)ps;
-                    Set<SetBonus> bonuses = SetBonus.parsePlayer(player);
-                    PluginManager pm = Bukkit.getPluginManager();
-                    if (bonuses.contains(SetBonus.VAMPIRE)) {
-                        EntityRegainHealthEvent ere = new EntityRegainHealthEvent(player, 1d, EntityRegainHealthEvent.RegainReason.CUSTOM);
-                        pm.callEvent(ere);
-                        if(!ere.isCancelled())
+                Player player = (CraftPlayer)ps;
+                Set<SetBonus> bonuses = SetBonus.parsePlayer(player);
+                PluginManager pm = Bukkit.getPluginManager();
+                if (bonuses.contains(SetBonus.VAMPIRE)) {
+                    EntityRegainHealthEvent ere = new EntityRegainHealthEvent(player, 1d, EntityRegainHealthEvent.RegainReason.CUSTOM);
+                    pm.callEvent(ere);
+                    if(!ere.isCancelled())
 
-                            player.setHealth(Math.min(ere.getAmount() + player.getHealth(), player.getMaxHealth()));
-                    }
-                    if (bonuses.contains(SetBonus.LIFESTEAL)) {
-                        EntityRegainHealthEvent ere = new EntityRegainHealthEvent(player, event.getFinalDamage(), EntityRegainHealthEvent.RegainReason.CUSTOM);
-                        pm.callEvent(ere);
-                        if(!ere.isCancelled())
-                            player.setHealth(Math.min(ere.getAmount() + player.getHealth(), player.getMaxHealth()));
-                    }
+                        player.setHealth(Math.min(ere.getAmount() + player.getHealth(), player.getMaxHealth()));
+                }
+                if (bonuses.contains(SetBonus.LIFESTEAL)) {
+                    EntityRegainHealthEvent ere = new EntityRegainHealthEvent(player, event.getFinalDamage(), EntityRegainHealthEvent.RegainReason.CUSTOM);
+                    pm.callEvent(ere);
+                    if(!ere.isCancelled())
+                        player.setHealth(Math.min(ere.getAmount() + player.getHealth(), player.getMaxHealth()));
                 }
             }
 
@@ -435,7 +430,7 @@ public class Listeners extends MainBase implements Listener {
             if (!(ps instanceof Player)) {
                 return;
             }
-            PlayerData pd = getPlugin().getPDManager().getData(((Player) ps).getUniqueId());
+            PlayerData pd = Main.getPlugin().getPDManager().getData(((Player) ps).getUniqueId());
             if (pd != null) {
                 Iterator<DurationEffect> iterator = pd.getEffectIterator();
                 while (iterator.hasNext()) {
@@ -443,7 +438,7 @@ public class Listeners extends MainBase implements Listener {
                     if (effects.isExpired()) iterator.remove();
                     else effects.onEvent(event);
                 }
-                if (pd.getAbilityKit() != null && !event.isCancelled()) pd.getAbilityKit().onEvent(event);
+                if (pd.getAbilityKit() != null) pd.getAbilityKit().onEvent(event);
             }
         }
 
@@ -479,7 +474,7 @@ public class Listeners extends MainBase implements Listener {
     public void onProjectileLaunchReal(ProjectileLaunchEvent event) {
         if(!(event.getEntity().getShooter() instanceof Player)) return;
         Player player = (Player) event.getEntity().getShooter();
-        PlayerData pd = getPlugin().getPDManager().getData(player.getUniqueId());
+        PlayerData pd = Main.getPlugin().getPDManager().getData(player.getUniqueId());
         if (pd != null) {
             Iterator<DurationEffect> iterator = pd.getEffectIterator();
             while (iterator.hasNext()) {
@@ -513,7 +508,7 @@ public class Listeners extends MainBase implements Listener {
             event.getCaught().teleport(event.getCaught().getLocation().add(0,1,0));
         }
         Player player = event.getPlayer();
-        PlayerData pd = getPlugin().getPDManager().getData(player.getUniqueId());
+        PlayerData pd = Main.getPlugin().getPDManager().getData(player.getUniqueId());
         if (pd != null) {
             Iterator<DurationEffect> iterator = pd.getEffectIterator();
             while (iterator.hasNext()) {
@@ -579,12 +574,12 @@ public class Listeners extends MainBase implements Listener {
                 armorstand.setCustomName(ChatColor.WHITE + "-" + hearts + ChatColor.WHITE + "*");
                 setTicksLived(armorstand, 19);
             }
-        }.runTaskLater(getPlugin(), 1);
+        }.runTaskLater(Main.getPlugin(), 1);
     }
 
     @EventHandler
     public void onEvent(PlayerToggleFlightEvent event) {
-        PlayerData pd = getPlugin().getPDManager().getData(event.getPlayer().getUniqueId());
+        PlayerData pd = Main.getPlugin().getPDManager().getData(event.getPlayer().getUniqueId());
         if (pd != null) {
             Iterator<DurationEffect> iterator = pd.getEffectIterator();
             while (iterator.hasNext()) {
@@ -602,7 +597,7 @@ public class Listeners extends MainBase implements Listener {
             event.setCancelled(true);
             return;
         }
-        PlayerData pd = getPlugin().getPDManager().getData(event.getShooter().getUniqueId());
+        PlayerData pd = Main.getPlugin().getPDManager().getData(event.getShooter().getUniqueId());
         if (pd != null) {
             Iterator<DurationEffect> iterator = pd.getEffectIterator();
             while (iterator.hasNext()) {
@@ -651,7 +646,7 @@ public class Listeners extends MainBase implements Listener {
 
     @EventHandler
     public void onItemCraft(CraftItemEvent event) {
-        event.getWhoClicked().sendMessage(tcm(_config.getString("CantCraft")));
+        event.getWhoClicked().sendMessage(tcm(config.getString("CantCraft")));
         event.setCancelled(true);
     }
 
@@ -660,17 +655,17 @@ public class Listeners extends MainBase implements Listener {
         if(!event.getPlayer().hasPlayedBefore()){
             event.getPlayer().playSound(event.getPlayer().getLocation(), Sound.ENDERDRAGON_GROWL, 3, 3);
         }
-        getPlugin().getPDManager().registerPlayer(getPlugin(), event.getPlayer());
+        Main.getPlugin().getPDManager().registerPlayer(Main.getPlugin(), event.getPlayer());
     }
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
-        getPlugin().getPDManager().unregisterPlayer(event.getPlayer());
+        Main.getPlugin().getPDManager().unregisterPlayer(event.getPlayer());
     }
 
     @EventHandler
     public void onPlayerSprint(PlayerToggleSprintEvent event) {
-        PlayerData pd = getPlugin().getPDManager().getData(event.getPlayer().getUniqueId());
+        PlayerData pd = Main.getPlugin().getPDManager().getData(event.getPlayer().getUniqueId());
         Iterator<DurationEffect> iterator = pd.getEffectIterator();
         while (iterator.hasNext()) {
             DurationEffect effects = iterator.next();
@@ -686,7 +681,7 @@ public class Listeners extends MainBase implements Listener {
 
     @EventHandler
     public void onAbilityCast(AbilityCastEvent event) {
-        PlayerData pd = getPlugin().getPDManager().getData(event.getPlayer().getUniqueId());
+        PlayerData pd = Main.getPlugin().getPDManager().getData(event.getPlayer().getUniqueId());
         Iterator<DurationEffect> iterator = pd.getEffectIterator();
         while (iterator.hasNext()) {
             DurationEffect effects = iterator.next();
@@ -758,7 +753,7 @@ public class Listeners extends MainBase implements Listener {
             public void run() {
                 entity.remove();
             }
-        }.runTaskLater(getPlugin(), ticks);
+        }.runTaskLater(Main.getPlugin(), ticks);
     }
 
     public void setDamageIndicator(LivingEntity entity, String heart, Vector initialVelocity, boolean isCritical) {
@@ -788,16 +783,13 @@ public class Listeners extends MainBase implements Listener {
                 armorstand.setCustomName(hearts);
                 setTicksLived(armorstand, 19);
             }
-        }.runTaskLater(getPlugin(), 1);
+        }.runTaskLater(Main.getPlugin(), 1);
     }
 
     final String NBTIStacks = "nbtiStacks";
 
     public void upgradeArmor(Player player) {
-        if (!isTargeteableEntity(player)) {
-            return;
-        }
-        ItemStack is = player.getInventory().getArmorContents()[randInt(4)];
+        ItemStack is = player.getInventory().getArmorContents()[Base.randInt(4)];
 
         if (is == null || is.getType() == Material.AIR) return;
         NBTItem nbti = new NBTItem(is);
@@ -806,14 +798,14 @@ public class Listeners extends MainBase implements Listener {
         nbti.setInteger(NBTIStacks, (stacks = stacks + 1));
         ItemMeta im = nbti.getItem().getItemMeta();
         List<String> lore = new ArrayList<>();
-        lore.add(_config.getTCM("LoreStacks", stacks, 100));
+        lore.add(config.getTCM("LoreStacks", stacks, 100));
         im.setLore(lore);
         is.setItemMeta(im);
         if (stacks % 4 == 0) {
             upgradeArmor(is);
-            player.sendMessage(tcm(_config.getString("GainStack"), is.getItemMeta().getDisplayName()) + " and upgraded");
+            player.sendMessage(tcm(config.getString("GainStack"), is.getItemMeta().getDisplayName()) + " and upgraded");
         } else {
-            player.sendMessage(tcm(_config.getString("GainStack"), is.getItemMeta().getDisplayName()));
+            player.sendMessage(tcm(config.getString("GainStack"), is.getItemMeta().getDisplayName()));
         }
     }
 

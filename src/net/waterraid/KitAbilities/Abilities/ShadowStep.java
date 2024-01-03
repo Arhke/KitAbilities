@@ -10,6 +10,8 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
+import static net.waterraid.KitAbilities.Main.getPlugin;
+
 public class ShadowStep extends RightClickAbilities{
     {
         setUpAbilityAndItem(8, 6, Material.COAL);

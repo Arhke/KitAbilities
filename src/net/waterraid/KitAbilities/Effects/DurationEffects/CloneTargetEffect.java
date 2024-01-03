@@ -3,9 +3,10 @@ package net.waterraid.KitAbilities.Effects.DurationEffects;
 import net.citizensnpcs.api.npc.NPC;
 import net.waterraid.KitAbilities.Effects.DurationEffect;
 import net.waterraid.KitAbilities.Main;
-import net.waterraid.KitAbilities.Managers.PlayerData;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import static net.waterraid.KitAbilities.Main.getPlugin;
 
 public class CloneTargetEffect extends DurationEffect {
     NPC npc;

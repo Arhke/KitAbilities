@@ -1,25 +1,20 @@
 package net.waterraid.KitAbilities.Commands.AbilityCommands;
 
+import com.Arhke.ArhkeLib.Lib.Base.CommandsBase;
 import com.Arhke.ArhkeLib.Lib.Base.SubCommandsBase;
-import com.Arhke.ArhkeLib.Lib.FileIO.DataManager;
-import com.Arhke.ArhkeLib.Lib.Utils.HelpMessage;
 import net.waterraid.KitAbilities.ConfigFiles;
-import net.waterraid.KitAbilities.Main;
 import org.bukkit.entity.Player;
 
-public class ReloadCommand extends SubCommandsBase<Main> {
-    public ReloadCommand(Main instance, DataManager dm) {
-        super(instance, "reload", dm);
+import static net.waterraid.KitAbilities.Main.getPlugin;
+
+public class ReloadCommand extends SubCommandsBase {
+    public ReloadCommand(CommandsBase cb) {
+        super(cb, "reload");
     }
 
     @Override
     public CommandType getType() {
         return CommandType.PLAYER;
-    }
-
-    @Override
-    public HelpMessage[] getHelpMessage() {
-        return new HelpMessage[0];
     }
 
     @Override

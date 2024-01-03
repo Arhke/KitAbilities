@@ -1,18 +1,16 @@
 package net.waterraid.KitAbilities.Abilities;
 
-import de.tr7zw.nbtapi.NBTItem;
 import net.waterraid.KitAbilities.Abilities.Templates.RightClickAbilities;
-import net.waterraid.KitAbilities.Effects.DurationEffects.RageEffect;
 import net.waterraid.KitAbilities.Main;
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import java.util.Collections;
+import static net.waterraid.KitAbilities.Abilities.Clone.secondsToTicks;
+import static net.waterraid.KitAbilities.Main.getPlugin;
 
 public class Tank extends RightClickAbilities {
     {

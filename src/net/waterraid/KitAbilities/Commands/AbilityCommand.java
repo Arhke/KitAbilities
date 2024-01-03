@@ -15,12 +15,14 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class AbilityCommand extends CommandsBase<Main> {
-    public AbilityCommand(Main instance, ConfigManager dm) {
-        super(instance, "ability", dm,
-                new ListCommand(instance, dm),
-                new ReloadCommand(instance, dm));
+import static com.Arhke.ArhkeLib.Lib.Base.Base.tcm;
+import static net.waterraid.KitAbilities.Main.getPlugin;
 
+public class AbilityCommand extends CommandsBase{
+    public AbilityCommand(Main instance, ConfigManager dm) {
+        super(instance, "ability", dm);
+        registerSubCommand(new ListCommand(this, "list"));
+        registerSubCommand(new ReloadCommand(this));
 //            "/ability - Displays this msg",
 //                    "/ability list - Lists all of the valid abilities",
 //                    "/ability help - Displays this Help Msg"
@@ -48,7 +50,7 @@ public class AbilityCommand extends CommandsBase<Main> {
                     return true;
                 }
             } else {
-                if (!isPlayer(sender)) {
+                if (!(sender instanceof Player)) {
                     sender.sendMessage(dm.getTCM(notPlayer));
                     return true;
                 }
@@ -88,10 +90,7 @@ public class AbilityCommand extends CommandsBase<Main> {
         return true;
     }
 
-    @Override
-    public void sendHelp(Player player, int i) {
 
-    }
     public static final String notFound = "PlayerNotFound", notPlayer = "NotPlayer", perm = "Permission", noAbility = "AbilityNotFound",
             noPerm = "NoPerm", noSpace = "NoInventorySpace", success = "Success";
     @Override

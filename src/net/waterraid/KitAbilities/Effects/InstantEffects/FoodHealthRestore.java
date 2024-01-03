@@ -4,7 +4,7 @@ import net.waterraid.KitAbilities.Effects.Effect;
 import net.waterraid.KitAbilities.Main;
 import net.waterraid.KitAbilities.Managers.PlayerData;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
+
 public class FoodHealthRestore extends Effect {
     public FoodHealthRestore(Main instance, Player target) {
         super(instance, target);

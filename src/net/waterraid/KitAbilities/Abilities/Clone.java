@@ -1,8 +1,8 @@
 package net.waterraid.KitAbilities.Abilities;
 
+import com.sk89q.worldguard.bukkit.WGBukkit;
+import com.sk89q.worldguard.protection.flags.DefaultFlag;
 import net.citizensnpcs.api.CitizensAPI;
-import net.citizensnpcs.api.ai.AttackStrategy;
-import net.citizensnpcs.api.event.DespawnReason;
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.trait.trait.Equipment;
 import net.minecraft.server.v1_8_R3.EnumParticle;
@@ -16,15 +16,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Projectile;
+import org.bukkit.entity.*;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
-import org.bukkit.metadata.MetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import static net.waterraid.KitAbilities.Main.getPlugin;
 
 public class Clone extends RightClickAbilities {
     {
@@ -74,6 +71,26 @@ public class Clone extends RightClickAbilities {
         effect.setFrom(getPlayer());
         effect.applyEffect();
 
+    }
+
+    public static int secondsToTicks(double castTime) {
+        return (int)castTime*20;
+    }
+
+    public static boolean isTargeteableLivingEntity(Entity entity) {
+        return entity instanceof Player && !entity.hasMetadata("NPC") && !isInProtectedRegion((Player)entity) && !entity.isDead();
+    }
+
+    public static boolean isTargeteableEntity(Entity entity) {
+        return isTargeteableLivingEntity(entity) || entity instanceof Item;
+    }
+
+    public static boolean isInProtectedRegion(Player player) {
+        return !WGBukkit.getRegionManager(player.getWorld()).getApplicableRegions(player.getLocation()).allows(DefaultFlag.PVP);
+    }
+
+    public static boolean isInProtectedRegion(Location loc) {
+        return !WGBukkit.getRegionManager(loc.getWorld()).getApplicableRegions(loc).allows(DefaultFlag.PVP);
     }
     @Override
     public void onEvent(EntityDamageByEntityEvent event){

@@ -1,6 +1,5 @@
 package net.waterraid.KitAbilities.Utils;
 
-import net.waterraid.KitAbilities.Abilities.Templates.Abilities;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;

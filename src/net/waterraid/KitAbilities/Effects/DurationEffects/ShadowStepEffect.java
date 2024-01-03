@@ -18,6 +18,12 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
+import static com.Arhke.ArhkeLib.Lib.Base.Base.tcm;
+import static com.Arhke.ArhkeLib.Lib.Base.Base.trueDamage;
+import static net.waterraid.KitAbilities.Abilities.Clone.isTargeteableLivingEntity;
+import static net.waterraid.KitAbilities.Abilities.Clone.secondsToTicks;
+import static net.waterraid.KitAbilities.Main.getPlugin;
+
 public class ShadowStepEffect extends DurationEffect {
     PlayerData _markedPlayerData;
     Player _markedPlayer;
@@ -46,7 +52,7 @@ public class ShadowStepEffect extends DurationEffect {
                 stacks++;
                 if (stacks == 4) {
                     event.setCancelled(true);
-                    Bukkit.broadcastMessage(translateColorCodes("&c&l"+ _target.getDisplayName() + " &f&lPRIMARY LOTUS!"));
+                    Bukkit.broadcastMessage(tcm("&c&l"+ _target.getDisplayName() + " &f&lPRIMARY LOTUS!"));
                     _markedPlayer.setVelocity(new Vector(0,-1,0));
                     _target.setVelocity(new Vector(0,-1,0));
                     BleedEffect be = new BleedEffect(getPlugin(), _markedPlayer, _markedPlayerData, 4);

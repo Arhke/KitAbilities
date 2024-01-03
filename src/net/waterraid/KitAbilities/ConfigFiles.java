@@ -7,7 +7,6 @@ import net.waterraid.KitAbilities.Abilities.Templates.Abilities;
 import net.waterraid.KitAbilities.Abilities.Templates.EnumAbilities;
 
 import java.util.Collections;
-import java.util.List;
 
 public enum ConfigFiles implements ConfigFile {
     AbilityLang("Lang", "Ability.yml"){
@@ -32,13 +31,27 @@ public enum ConfigFiles implements ConfigFile {
 
 
         }
+    }, ListenerLang("Lang", "Listeners.yml"){
+        @Override
+        public void createConfigDefaults(FileManager fileManager) {
+//            Listeners:
+//            NoThrowAbility: "&cYou can't throw Ability Items out of your inventory"
+//            CantUseCrafting: "&cNope, Can't Use that here, Sorry"
+//            CantCraft: "&cWould Be Nice No? Too bad you can't"
+//            GainStack: "&7Your {0}&r&7 gained a Stack"
+//            ArmorUpgrade: "&bThat Item has been Upgraded"
+//            MaxStacks: "&aMax stacks!, separate ability"
+//            LoreMaxStacks: "&4&lMaxStacks"
+//            LoreStacks: "&4{0} stacks"
+
+        }
     };
     final String[] file;
     ConfigFiles(String... file){
         this.file = file;
     }
     @Override
-    public String[] getFilePaths() {
+    public String[] getFilePath() {
         return this.file;
     }
 }

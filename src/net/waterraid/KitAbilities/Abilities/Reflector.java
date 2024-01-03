@@ -8,6 +8,8 @@ import org.bukkit.Sound;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
+import static net.waterraid.KitAbilities.Main.getPlugin;
+
 public class Reflector extends RightClickAbilities {
     {
         setUpAbilityAndItem(18, 6, Material.MAGMA_CREAM);

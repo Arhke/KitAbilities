@@ -8,6 +8,9 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
+import static net.waterraid.KitAbilities.Abilities.Clone.isTargeteableLivingEntity;
+import static net.waterraid.KitAbilities.Main.getPlugin;
+
 public class Blaze extends RightClickAbilities {
     {
         setUpAbilityAndItem(5, 5, Material.BLAZE_POWDER);
