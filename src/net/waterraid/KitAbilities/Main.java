@@ -1,5 +1,6 @@
 package net.waterraid.KitAbilities;
 
+import com.Arhke.ArhkeLib.Lib.Base.CommandsBase;
 import com.Arhke.ArhkeLib.Lib.Base.PluginBase;
 import com.Arhke.ArhkeLib.Lib.FileIO.DataManager;
 import com.Arhke.ArhkeLib.Lib.FileIO.FileManager;
@@ -50,17 +51,17 @@ public class Main extends PluginBase {
         _armorManager = new ArmorManager(this, data, data.getDataManager().getDataManager(ArmorKey));
         pdManager = new PlayerDataManager(this, data, data.getDataManager().getDataManager(PlayerDataKey));
         _weaponManager = new WeaponManager(this, data, data.getDataManager().getDataManager(WeaponKey));
-        CommandsBase armor = new ArmorCommand(this),
-                effects = new EffectsCommand(this), pf = new PotionFillCommand(this), weapon = new WeaponCommand(this);
+        CommandsBase armor = new ArmorCommand("armor", getConfig(ConfigFiles.ArmorLang)),
+                effects = new EffectsCommand("effects", getConfig(ConfigFiles.EffectLang)), pf = new PotionFillCommand("potionfill", getConfig(ConfigFiles.EffectLang)),
+                weapon = new WeaponCommand("weapon", getConfig(ConfigFiles.EffectLang));
         getCommand(armor.getCmd()).setExecutor(armor);
-        AbilityCommand ability = new AbilityCommand(this, getConfig(ConfigFiles.AbilityLang));
-        getConfig(ConfigFiles.AbilityLang).getFM().save();
+        AbilityCommand ability = new AbilityCommand(getConfig(ConfigFiles.AbilityLang));
         registerCommands(ability);
         getCommand(effects.getCmd()).setExecutor(effects);
         getCommand(pf.getCmd()).setExecutor(pf);
         getCommand("pf").setExecutor(pf);
         getCommand(weapon.getCmd()).setExecutor(weapon);
-        Bukkit.getPluginManager().registerEvents(new Listeners(getConfigManager().getDataManager("Messages", "Listeners"), pdManager), this);
+        Bukkit.getPluginManager().registerEvents(new Listeners(getConfig(ConfigFiles.ListenerLang), pdManager), this);
         registerHooks(Plugins.PLACEHOLDERAPI, Plugins.VAULT);
         registerCustomEvents(8);
         getHook().registerPlaceholderAPI("ABILITY", (p, s)-> getPlugin().getPDManager().getData(p.getUniqueId()).getAbilityKit().getItemStack().getItemMeta().getDisplayName() + " " + ChatColor.GRAY);
@@ -90,9 +91,6 @@ public class Main extends PluginBase {
         return _weaponManager;
     }
 
-    public DataManager getConfigManager() {
-        return _config;
-    }
 
     //todo
     public static Main getPlugin(){

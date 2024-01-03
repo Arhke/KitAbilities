@@ -15,17 +15,17 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.Arrays;
+
 import static com.Arhke.ArhkeLib.Lib.Base.Base.tcm;
 import static net.waterraid.KitAbilities.Main.getPlugin;
 
 public class AbilityCommand extends CommandsBase{
-    public AbilityCommand(Main instance, ConfigManager dm) {
-        super(instance, "ability", dm);
+    public AbilityCommand(ConfigManager dm) {
+        super("ability", dm);
         registerSubCommand(new ListCommand(this, "list"));
         registerSubCommand(new ReloadCommand(this));
-//            "/ability - Displays this msg",
-//                    "/ability list - Lists all of the valid abilities",
-//                    "/ability help - Displays this Help Msg"
+//
 //        List<String> helpList = _config.getStringList("Help");
 //        String[] helpString = helpList.toArray(new String[helpList.size()]);
 //        if(helpString.length == 0){
@@ -95,6 +95,9 @@ public class AbilityCommand extends CommandsBase{
             noPerm = "NoPerm", noSpace = "NoInventorySpace", success = "Success";
     @Override
     public void setDefaults() {
+        dm.isOrDefault(Arrays.asList("/ability - Displays this msg",
+                "/ability list - Lists all of the valid abilities",
+                "/ability help - Displays this Help Msg"), HelpListKey);
         dm.isOrDefault("&cPlayer {0} was not found.", notFound);
         dm.isOrDefault("&cThis command is only allowed to be used by players", notPlayer);
         dm.isOrDefault("ability.{0}", perm);

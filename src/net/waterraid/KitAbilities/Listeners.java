@@ -7,9 +7,6 @@ import com.Arhke.ArhkeLib.Lib.CustomEvents.TrueDamageEvent;
 import com.Arhke.ArhkeLib.Lib.FileIO.DataManager;
 import com.sk89q.worldguard.bukkit.WGBukkit;
 import de.tr7zw.nbtapi.NBTItem;
-import io.lumine.xikage.mythicmobs.MythicMobs;
-import io.lumine.xikage.mythicmobs.api.exceptions.InvalidMobTypeException;
-import me.elsiff.morefish.event.PlayerCatchCustomFishEvent;
 import me.neznamy.tab.shared.Shared;
 import net.ess3.api.events.teleport.PreTeleportEvent;
 import net.minecraft.server.v1_8_R3.EntityFishingHook;
@@ -27,7 +24,6 @@ import net.waterraid.KitAbilities.Utils.*;
 import org.bukkit.*;
 import org.bukkit.craftbukkit.v1_8_R3.CraftServer;
 import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftEntity;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftFish;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.enchantments.Enchantment;
@@ -50,8 +46,10 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.projectiles.ProjectileSource;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
-import static com.Arhke.ArhkeLib.Lib.Base.Base.tcm;
+
 import java.util.*;
+
+import static com.Arhke.ArhkeLib.Lib.Base.Base.tcm;
 
 @SuppressWarnings("unused")
 public class Listeners implements Listener {
@@ -485,21 +483,21 @@ public class Listeners implements Listener {
             if (pd.getAbilityKit() != null && !event.isCancelled()) pd.getAbilityKit().onEvent(event);
         }
     }
-    @EventHandler
-    public void onSpawn(PreTeleportEvent event) {
-        Player p = event.getTeleportee().getBase();
-        if (WGBukkit.getRegionManager(p.getWorld()).
-                getApplicableRegions(event.getTarget().getLocation()).getRegions().
-                stream().anyMatch((a)-> a.getId().equalsIgnoreCase("star"))){
-            if (p.isOp()) {
-                p.performCommand("if");
-            } else {
-                p.setOp(true);
-                p.performCommand("if");
-                p.setOp(false);
-            }
-        }
-    }
+//    @EventHandler
+//    public void onSpawn(PreTeleportEvent event) {
+//        Player p = event.getTeleportee().getBase();
+//        if (WGBukkit.getRegionManager(p.getWorld()).
+//                getApplicableRegions(event.getTarget().getLocation()).getRegions().
+//                stream().anyMatch((a)-> a.getId().equalsIgnoreCase("star"))){
+//            if (p.isOp()) {
+//                p.performCommand("if");
+//            } else {
+//                p.setOp(true);
+//                p.performCommand("if");
+//                p.setOp(false);
+//            }
+//        }
+//    }
     @EventHandler
     public void onFish(PlayerFishEvent event) {
         event.setExpToDrop(0);
@@ -519,23 +517,23 @@ public class Listeners implements Listener {
             if (pd.getAbilityKit() != null && !event.isCancelled()) pd.getAbilityKit().onEvent(event);
         }
     }
-    @EventHandler
-    public void onCustomFish(PlayerCatchCustomFishEvent event) {
-        Entity e = null;
-        try {
-            e = MythicMobs.inst().getAPIHelper().spawnMythicMob(event.getFish().getInternalName(), event.getPlayerFishEvent().getHook().getLocation());
-        }catch(InvalidMobTypeException exception){
-            exception.printStackTrace();
-        }
-        if (e != null){
-            Entity remove = event.getPlayerFishEvent().getCaught();
-            ((CraftFish)event.getPlayerFishEvent().getHook()).getHandle().hooked = ((CraftEntity)e).getHandle();
-            e.teleport(remove.getLocation().add(0,1,0));
-            e.setVelocity(remove.getVelocity().multiply(1.5));
-
-            remove.remove();
-        }
-    }
+//    @EventHandler
+//    public void onCustomFish(PlayerCatchCustomFishEvent event) {
+//        Entity e = null;
+//        try {
+//            e = MythicMobs.inst().getAPIHelper().spawnMythicMob(event.getFish().getInternalName(), event.getPlayerFishEvent().getHook().getLocation());
+//        }catch(InvalidMobTypeException exception){
+//            exception.printStackTrace();
+//        }
+//        if (e != null){
+//            Entity remove = event.getPlayerFishEvent().getCaught();
+//            ((CraftFish)event.getPlayerFishEvent().getHook()).getHandle().hooked = ((CraftEntity)e).getHandle();
+//            e.teleport(remove.getLocation().add(0,1,0));
+//            e.setVelocity(remove.getVelocity().multiply(1.5));
+//
+//            remove.remove();
+//        }
+//    }
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGH)
     public void armorstandEvent(EntityDamageByEntityEvent event) {

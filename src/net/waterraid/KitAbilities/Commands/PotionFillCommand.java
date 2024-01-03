@@ -1,6 +1,7 @@
 package net.waterraid.KitAbilities.Commands;
 
-import net.waterraid.KitAbilities.Main;
+import com.Arhke.ArhkeLib.Lib.Base.CommandsBase;
+import com.Arhke.ArhkeLib.Lib.FileIO.ConfigManager;
 import net.waterraid.KitAbilities.Managers.PlayerData;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -25,8 +26,13 @@ public class PotionFillCommand extends CommandsBase implements CommandExecutor {
         SplashHeal = potion.toItemStack(1);
     }
 
-    public PotionFillCommand(Main instance) {
-        super(instance);
+
+    public PotionFillCommand(String potionfill, ConfigManager config) {
+        super(potionfill, config);
+    }
+
+    @Override
+    public void setDefaults() {
 
     }
 

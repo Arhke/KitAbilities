@@ -1,5 +1,7 @@
 package net.waterraid.KitAbilities.Commands;
 
+import com.Arhke.ArhkeLib.Lib.Base.CommandsBase;
+import com.Arhke.ArhkeLib.Lib.FileIO.ConfigManager;
 import net.waterraid.KitAbilities.Effects.Effect;
 import net.waterraid.KitAbilities.Main;
 import org.bukkit.Bukkit;
@@ -13,9 +15,10 @@ import java.lang.reflect.InvocationTargetException;
 import static net.waterraid.KitAbilities.Main.getPlugin;
 
 public class EffectsCommand extends CommandsBase implements CommandExecutor {
-    public EffectsCommand(Main instance){
-        super(instance);
+    public EffectsCommand(String command, ConfigManager dm) {
+        super(command, dm);
     }
+
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
         if (!commandSender.isOp()){
@@ -28,5 +31,10 @@ public class EffectsCommand extends CommandsBase implements CommandExecutor {
             e.printStackTrace();
         }
         return true;
+    }
+
+    @Override
+    public void setDefaults() {
+
     }
 }
