@@ -8,14 +8,13 @@ import net.waterraid.KitAbilities.Main;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ArmorManager extends MainBase {
+public class ArmorManager{
     public Map<String, Armor> armorKitsMap = new HashMap<>();
     DataManager _dm;
     FileManager _fm;
 
 
-    public ArmorManager(Main Instance, FileManager fm, DataManager dm) {
-        super(Instance);
+    public ArmorManager(FileManager fm, DataManager dm) {
         _dm = dm;
         _fm = fm;
         for (String key : dm.getConfig().getKeys(false)) {

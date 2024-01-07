@@ -1,5 +1,6 @@
 package net.waterraid.KitAbilities.Utils;
 
+import com.Arhke.ArhkeLib.Lib.Base.Base;
 import de.tr7zw.nbtapi.NBTItem;
 import org.bukkit.ChatColor;
 import org.bukkit.inventory.ItemStack;
@@ -7,7 +8,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.*;
 
-import static net.waterraid.KitAbilities.Utils.Base.tcm;
+import static com.Arhke.ArhkeLib.Lib.Base.Base.tcm;
 
 public class ArmorAccessories {
 
@@ -19,11 +20,9 @@ public class ArmorAccessories {
     Set<SetBonus> setBonus = new HashSet<>();
     List<String> accessories = new ArrayList<>();
     int slots = 0;
-    public static void main(String[] args) {
-        System.out.println(Arrays.toString("Hi|Hello\\|Tempting....".split("\\|")));
+    static String filterString(String a){
+        return a;
     }
-
-
     public ArmorAccessories(ItemStack is) {
         this.is = is;
         List<String> lore = is.getItemMeta().getLore();
@@ -39,13 +38,13 @@ public class ArmorAccessories {
                 accessories.add(lore.get(i).replace("⬤ ",""));
                 continue;
             }
-            if (Base.filterString(lineLore).contains("SETBONUS")) {
+            if (filterString(lineLore).contains("SETBONUS")) {
                 try {
-                    setBonus.add(SetBonus.valueOf(Base.filterString(lineLore).replace("SETBONUS", "")));
+                    setBonus.add(SetBonus.valueOf(filterString(lineLore).replace("SETBONUS", "")));
                 }catch(IllegalArgumentException ignored){}
                 continue;
             }
-            if(Base.filterString(lineLore).contains("EMPTYSLOT")){
+            if(filterString(lineLore).contains("EMPTYSLOT")){
                 slots++;
                 continue;
             }
@@ -56,14 +55,14 @@ public class ArmorAccessories {
                 otherLore.add(lore.get(i));
                 continue;
             }
-            Attributes attr = Attributes.getAttribute(Base.filterString(lineLore.substring(0, last).toUpperCase()));
+            Attributes attr = Attributes.getAttribute(filterString(lineLore.substring(0, last).toUpperCase()));
             if (attr == null) {
                 otherLore.add(lore.get(i));
                 continue;
             }
             int modifier;
             try {
-                modifier = Integer.parseInt(Base.filterString(lineLore.substring(last + 1)));
+                modifier = Integer.parseInt(filterString(lineLore.substring(last + 1)));
             } catch (NumberFormatException e) {
                 otherLore.add(lore.get(i));
                 continue;
@@ -91,21 +90,21 @@ public class ArmorAccessories {
         }
         for (int i = 0; i < lore.size(); i++) {
             String lineLore = lore.get(i).toUpperCase();
-            if (Base.filterString(lineLore).contains("SETBONUS")) {
+            if (filterString(lineLore).contains("SETBONUS")) {
                 try{
-                    ret.getSetBonus().add(SetBonus.valueOf(Base.filterString(lineLore).replace("SETBONUS", "")));
+                    ret.getSetBonus().add(SetBonus.valueOf(filterString(lineLore).replace("SETBONUS", "")));
                 }catch(IllegalArgumentException ignored){}
                 continue;
             }
             int last = lineLore.lastIndexOf(' ');
             if (last == -1) continue;
-            Attributes attr = Attributes.CustomAttributes.getAttribute(Base.filterString(lineLore.substring(0, last).toUpperCase()));
+            Attributes attr = Attributes.CustomAttributes.getAttribute(filterString(lineLore.substring(0, last).toUpperCase()));
             if (attr == null) {
                 continue;
             }
             int modifier;
             try {
-                modifier = Integer.parseInt(Base.filterString(lineLore.substring(last + 1)));
+                modifier = Integer.parseInt(filterString(lineLore.substring(last + 1)));
             } catch (NumberFormatException e) {
                 continue;
             }
@@ -123,8 +122,8 @@ public class ArmorAccessories {
 
         for (int i = 0; i < lore.size(); i++) {
             String lineLore = lore.get(i).toUpperCase();
-            if (Base.filterString(lineLore).contains("SETBONUS")) {
-                ret.getSetBonus().add(SetBonus.valueOf(Base.filterString(lineLore).replace("SETBONUS", "")));
+            if (filterString(lineLore).contains("SETBONUS")) {
+                ret.getSetBonus().add(SetBonus.valueOf(filterString(lineLore).replace("SETBONUS", "")));
             }
         }
         return ret;

@@ -32,8 +32,7 @@ public class Main extends PluginBase {
     PlayerDataManager pdManager;
     WeaponManager _weaponManager;
 
-    private File _configFile, _dataFile;
-    DataManager _config;
+    private File _dataFile;
 
     String ArmorKey = "ArmorMap", PlayerDataKey = "DataMap", WeaponKey = "WeaponMap";
     @Override
@@ -48,7 +47,7 @@ public class Main extends PluginBase {
         FileManager data = new FileManager(_dataFile);
 
 
-        _armorManager = new ArmorManager(this, data, data.getDataManager().getDataManager(ArmorKey));
+        _armorManager = new ArmorManager(data, data.getDataManager().getDataManager(ArmorKey));
         pdManager = new PlayerDataManager(this, data, data.getDataManager().getDataManager(PlayerDataKey));
         _weaponManager = new WeaponManager(this, data, data.getDataManager().getDataManager(WeaponKey));
         CommandsBase armor = new ArmorCommand("armor", getConfig(ConfigFiles.ArmorLang)),
@@ -70,7 +69,7 @@ public class Main extends PluginBase {
     @Override
     public void onDisable() {
         pdManager.unregisterAll();
-        deleteDirectory(Paths.get(getDataFolder().getParentFile().toString(), "MythicMobs", "SavedData").toFile());
+//        deleteDirectory(Paths.get(getDataFolder().getParentFile().toString(), "MythicMobs", "SavedData").toFile());
     }
     boolean deleteDirectory(File directoryToBeDeleted) {
         File[] allContents = directoryToBeDeleted.listFiles();
@@ -92,12 +91,7 @@ public class Main extends PluginBase {
     }
 
 
-    //todo
     public static Main getPlugin(){
         return _plugin;
-    }
-    public static void main(String[] args){
-        List<String> test = new ArrayList<>();
-        test.toArray(new String[0]);
     }
 }

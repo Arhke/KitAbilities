@@ -12,11 +12,11 @@ import java.util.UUID;
 
 public class PlayerDataManager {
     public HashMap<UUID, PlayerData> dataMap = new HashMap<>();
-    private DataManager _dm;
-    private FileManager _fm;
+    private final DataManager dm;
+    private final FileManager fm;
     public PlayerDataManager(Main plugin, FileManager fm, DataManager dm){
-        _fm = fm;
-        _dm = dm;
+        this.fm = fm;
+        this.dm = dm;
         for (Player player:Bukkit.getOnlinePlayers()) {
             dataMap.put(player.getUniqueId(), new PlayerData(plugin, dm.getDataManager(player.getUniqueId().toString()), player));
         }
@@ -33,20 +33,20 @@ public class PlayerDataManager {
     }
 
     public void registerPlayer(Main plugin, Player player){
-        dataMap.putIfAbsent(player.getUniqueId(), new PlayerData(plugin, _dm.getDataManager(player.getUniqueId().toString()), player));
+        dataMap.putIfAbsent(player.getUniqueId(), new PlayerData(plugin, dm.getDataManager(player.getUniqueId().toString()), player));
     }
     public void unregisterPlayer(Player player){
         PlayerData pd = dataMap.remove(player.getUniqueId());
         if (pd == null) return;
-        pd.write(_dm.getDataManager(player.getUniqueId().toString()));
+        pd.write(dm.getDataManager(player.getUniqueId().toString()));
         pd.getAbilityKit().refreshCoolDown();
-        _fm.save();
+        fm.save();
     }
     public void unregisterAll() {
         for(Map.Entry<UUID, PlayerData> dataEntry: dataMap.entrySet()){
-            dataEntry.getValue().write(_dm.getDataManager(dataEntry.getKey().toString()));
+            dataEntry.getValue().write(dm.getDataManager(dataEntry.getKey().toString()));
         }
-        _fm.save();
+        fm.save();
     }
 
     /**

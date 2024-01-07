@@ -88,13 +88,13 @@ public enum SetBonus {
         boolean set = false;
         for (ItemStack is : player.getInventory().getArmorContents()) {
             if(is == null || is.getType() == Material.AIR) return Collections.emptySet();
-            ArmorAccessories aa = ArmorAccessories.parseSetBonus(is);
-            if (!set) {
-                bonuses = new HashSet<>(aa.getSetBonus());
-                set = true;
-                continue;
-            }
-            bonuses.retainAll(aa.getSetBonus());
+//            ArmorAccessories aa = ArmorAccessories.parseSetBonus(is);
+//            if (!set) {
+//                bonuses = new HashSet<>(aa.getSetBonus());
+//                set = true;
+//                continue;
+//            }
+//            bonuses.retainAll(aa.getSetBonus());
         }
         return bonuses;
 
@@ -113,13 +113,13 @@ public enum SetBonus {
                 is = armor[i];
             }
             if(is == null || is.getType() == Material.AIR) return Collections.emptySet();
-            ArmorAccessories aa = ArmorAccessories.parseSetBonus(is);
-            if (!set) {
-                bonuses = new HashSet<>(aa.getSetBonus());
-                set = true;
-                continue;
-            }
-            bonuses.retainAll(aa.getSetBonus());
+//            ArmorAccessories aa = ArmorAccessories.parseSetBonus(is);
+//            if (!set) {
+//                bonuses = new HashSet<>(aa.getSetBonus());
+//                set = true;
+//                continue;
+//            }
+//            bonuses.retainAll(aa.getSetBonus());
         }
         return bonuses;
     }

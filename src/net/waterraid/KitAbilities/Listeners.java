@@ -540,11 +540,12 @@ public class Listeners implements Listener {
         if (!(event.getDamager() instanceof Player || event.getDamager() instanceof Arrow) ||
                 !(event.getEntity() instanceof LivingEntity) || event.getEntity() instanceof ArmorStand) return;
         LivingEntity entity = (LivingEntity) event.getEntity();
-        long dmg = (long) (Math.ceil(entity.getHealth()) - Math.max(Math.ceil(entity.getHealth() - event.getFinalDamage()), 0));
-        String health = dmg % 2 == 1 ? ChatColor.BLACK + "❤" : "";
-        for (int i = 0; i < dmg / 2; i++) {
-            health = "❤" + health;
-        }
+        int dmg = (int)(10*(Math.ceil(entity.getHealth()) - Math.max(Math.ceil(entity.getHealth() - event.getFinalDamage()), 0)));
+//        String health = dmg % 2 == 1 ? ChatColor.BLACK + "❤" : "";
+//        for (int i = 0; i < dmg / 2; i++) {
+//            health = "❤" + health;
+//        }
+        String health = (dmg/10d) + "";
         setDamageIndicator(entity, health, entity.getVelocity().clone(), event.getDamager().getFallDistance() > 0 && !event.getDamager().isOnGround());
     }
 
@@ -553,12 +554,12 @@ public class Listeners implements Listener {
         if (event.getDamager() == null ||
                 event.getEntity() == null || event.getEntity() instanceof ArmorStand) return;
         LivingEntity entity = event.getEntity();
-        long dmg = (long) (Math.ceil(entity.getHealth()) - Math.max(Math.ceil(entity.getHealth() - event.getDamage()), 0));
-        String health = dmg % 2 == 1 ? ChatColor.BLACK + "❤" : "";
-        for (int i = 0; i < dmg / 2; i++) {
-            health = "❤" + health;
-        }
-        final String hearts = health;
+        int dmg = (int)(10*(Math.ceil(entity.getHealth()) - Math.max(Math.ceil(entity.getHealth() - event.getDamage()), 0)));
+//        String health = dmg % 2 == 1 ? ChatColor.BLACK + "❤" : "";
+//        for (int i = 0; i < dmg / 2; i++) {
+//            health = "❤" + health;
+//        }
+        final String hearts = (dmg/10d) + "";
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -591,7 +592,7 @@ public class Listeners implements Listener {
     @EventHandler
     public void onArrowHitPlayer(ArrowHitPlayerEvent event) {
         if (event.getPlayer().getUniqueId().equals(event.getShooter().getUniqueId())) {
-            event.getShooter().sendMessage(ChatColor.RED + "Sorry, Bow Boosting is hereby disabled as of 7/27");
+            event.getShooter().sendMessage(ChatColor.RED + "You may not Bow Boost");
             event.setCancelled(true);
             return;
         }
@@ -621,14 +622,15 @@ public class Listeners implements Listener {
         }
         event.setAmount(event.getAmount()*(1+ret/100));
 
-        int heal = (int) (Math.min(event.getAmount(), player.getMaxHealth() - player.getHealth()));
-        String health = heal % 2 == 1 ? ChatColor.BLACK + "❤" + ChatColor.GREEN + "✔" : "✔";
-        for (int i = 0; i < heal / 2; i++) {
-            health = "❤" + health;
-        }
+        double heal = ((int) ((Math.min(event.getAmount(), player.getMaxHealth() - player.getHealth()))*10))/10d;
+//        String health = heal % 2 == 1 ? ChatColor.BLACK + "❤" + ChatColor.GREEN + "✔" : "✔";
+//        for (int i = 0; i < heal / 2; i++) {
+//            health = "❤" + health;
+//        }
+
         ArmorStand armorstand = (ArmorStand) player.getWorld().spawnEntity(player.getEyeLocation(), EntityType.ARMOR_STAND);
         armorstand.setVisible(false);
-        armorstand.setCustomName(ChatColor.BOLD + "" + ChatColor.GREEN + "+" + health);
+        armorstand.setCustomName(ChatColor.BOLD + "" + ChatColor.GREEN + "+" + heal);
         armorstand.setGravity(true);
         armorstand.setVelocity(new Vector(Math.random() * 0.4 - 0.2, 0, Math.random() * 0.4 - 0.2).add(player.getVelocity()));
         armorstand.setSmall(true);
