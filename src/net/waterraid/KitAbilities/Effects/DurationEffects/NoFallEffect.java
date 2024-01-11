@@ -35,7 +35,7 @@ public class NoFallEffect extends DurationEffect {
 
     @Override
     public void onEvent(EntityDamageEvent event) {
-        if(event.getCause() == EntityDamageEvent.DamageCause.FALL && !isExpired()){
+        if(event.getCause() == EntityDamageEvent.DamageCause.FALL){
             event.setDamage(event.getDamage()*_strength);
             event.setCancelled(false);
         }

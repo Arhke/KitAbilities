@@ -48,8 +48,8 @@ public class Main extends PluginBase {
 
 
         _armorManager = new ArmorManager(data, data.getDataManager().getDataManager(ArmorKey));
-        pdManager = new PlayerDataManager(this, data, data.getDataManager().getDataManager(PlayerDataKey));
-        _weaponManager = new WeaponManager(this, data, data.getDataManager().getDataManager(WeaponKey));
+        pdManager = new PlayerDataManager(data, data.getDataManager().getDataManager(PlayerDataKey));
+        _weaponManager = new WeaponManager(data, data.getDataManager().getDataManager(WeaponKey));
         CommandsBase armor = new ArmorCommand("armor", getConfig(ConfigFiles.ArmorLang)),
                 effects = new EffectsCommand("effects", getConfig(ConfigFiles.EffectLang)), pf = new PotionFillCommand("potionfill", getConfig(ConfigFiles.EffectLang)),
                 weapon = new WeaponCommand("weapon", getConfig(ConfigFiles.EffectLang));

@@ -41,29 +41,14 @@ public class PotionFillCommand extends CommandsBase implements CommandExecutor {
         if (commandSender instanceof Player) {
             Player player = (Player) commandSender;
             if (strings.length == 1 && strings[0].equalsIgnoreCase("clear")) {
-                PlayerData pd = getPlugin().getPDManager().getOrNewData(player.getUniqueId());
-                if ((player.isSneaking() && !pd._remove) || (pd._remove && !player.isSneaking())) {
-                    for (int i = 0; i < player.getInventory().getSize(); i++) {
-                        if (player.getInventory().getItem(i) != null && player.getInventory().getItem(i).isSimilar(SplashHeal)) {
-                            player.getInventory().setItem(i, null);
-                        }
+                for (int i = 0; i < player.getInventory().getSize(); i++) {
+                    if (player.getInventory().getItem(i) != null && player.getInventory().getItem(i).isSimilar(SplashHeal)) {
+                        player.getInventory().setItem(i, null);
                     }
-                } else {
-                    player.getInventory().clear();
-                    player.getInventory().setArmorContents(new ItemStack[]{new ItemStack(Material.AIR, 1), new ItemStack(Material.AIR, 1), new ItemStack(Material.AIR, 1), new ItemStack(Material.AIR, 1)});
                 }
-                return true;
-            } else if (strings.length == 1 && strings[0].equalsIgnoreCase("toggle")) {
-                PlayerData pd = getPlugin().getPDManager().getOrNewData(player.getUniqueId());
-                if (pd._remove) {
-                    pd._remove = false;
-                    player.sendMessage(tcm("&7You have turned Quick Claim &a&lOn." +
-                            "\n&6Right Click to Quick Claim, Shift + Right CLick to Normal Claim"));
-                } else {
-                    pd._remove = true;
-                    player.sendMessage(tcm("&7You have turned Quick Claim &l&cOff." +
-                            "\n&6Right Click to Normal Claim, Shift + Right CLick to Quick Claim"));
-                }
+                player.getInventory().clear();
+                player.getInventory().setArmorContents(new ItemStack[]{new ItemStack(Material.AIR, 1), new ItemStack(Material.AIR, 1), new ItemStack(Material.AIR, 1), new ItemStack(Material.AIR, 1)});
+
                 return true;
             }
             Inventory inventory = player.getInventory();

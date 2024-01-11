@@ -14,24 +14,85 @@
   <component name="ChangeListManager">
     <list default="true" id="2fbdd860-7836-45f4-9984-745851d81557" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Listeners$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Listeners$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Listeners$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Listeners$4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Listeners$5.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Listeners.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Utils/ArmorAccessories.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Utils/ArmorTags$Flag.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Utils/ArmorTags$Flag.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Utils/ArmorTags$Operations.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Utils/ArmorTags$Operations.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Utils/ArmorTags.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Utils/ArmorTags.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Utils/SetBonus.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Utils/SetBonus.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Abilities/Atom.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Abilities/Atom.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Abilities/Blaze.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Abilities/Blaze.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Abilities/Cliff$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Abilities/Cliff.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Abilities/Clone.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Abilities/Clone.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Abilities/Dodge.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Abilities/Hooker$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Abilities/Hooker$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Abilities/Hooker.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Abilities/Phase.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Abilities/Phase.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Abilities/Rage.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Abilities/Reflector.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Abilities/Reflector.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Abilities/ShadowStep.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Abilities/Smash.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Abilities/Tank.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Abilities/Templates/Abilities$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Abilities/Templates/Abilities$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Abilities/Templates/Abilities$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Abilities/Templates/Abilities$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Abilities/Templates/Abilities.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Abilities/Templates/Abilities.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Abilities/Templates/ChargeHitAbilities.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Abilities/Templates/EnumAbilities.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Abilities/Templates/FishingRodAbilityKits.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Abilities/Templates/OnHitAbilities.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Abilities/Templates/RightClickAbilities.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Abilities/Templates/RightClickAbilities.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Abilities/Untarget.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Armor/Weapons.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Armor/Weapons.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Commands/AbilityCommand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Commands/PotionFillCommand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/ConfigFiles$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/ConfigFiles$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/ConfigFiles$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/ConfigFiles$4.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/ConfigFiles$5.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/ConfigFiles.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Effects/DurationEffects/NoFallEffect.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Effects/DurationEffects/NoFallEffect.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Effects/InstantEffects/FoodHealthRestore.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Effects/InstantEffects/KnockUpEffect.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Effects/TaskEffects.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Managers/ArmorManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Managers/ArmorManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Managers/PlayerData$PotionData.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Managers/PlayerData$PotionData.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Managers/PlayerData$PotionQueue$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Managers/PlayerData$PotionQueue$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Managers/PlayerData$PotionQueue.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Managers/PlayerData$PotionQueue.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Managers/PlayerData.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Managers/PlayerData.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Managers/PlayerDataManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Managers/PlayerDataManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Managers/WeaponManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Managers/WeaponManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/KitAbilities/net/waterraid/KitAbilities/Utils/Debuff.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Abilities/Atom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Abilities/Atom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Abilities/Blaze.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Abilities/Blaze.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Abilities/Cliff.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Abilities/Cliff.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Abilities/Clone.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Abilities/Clone.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Abilities/Dodge.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Abilities/Dodge.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Abilities/Hooker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Abilities/Hooker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Abilities/Phase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Abilities/Phase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Abilities/Rage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Abilities/Rage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Abilities/Reflector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Abilities/Reflector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Abilities/ShadowStep.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Abilities/ShadowStep.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Abilities/Smash.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Abilities/Smash.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Abilities/Tank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Abilities/Tank.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Abilities/Templates/Abilities.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Abilities/Templates/Abilities.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Abilities/Templates/ChargeHitAbilities.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Abilities/Templates/ChargeHitAbilities.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Abilities/Templates/EnumAbilities.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Abilities/Templates/EnumAbilities.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Abilities/Templates/FishingRodAbilityKits.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Abilities/Templates/FishingRodAbilityKits.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Abilities/Templates/OnHitAbilities.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Abilities/Templates/OnHitAbilities.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Abilities/Templates/RightClickAbilities.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Abilities/Templates/RightClickAbilities.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Abilities/Untarget.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Abilities/Untarget.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Armor/Weapons.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Armor/Weapons.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Commands/AbilityCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Commands/AbilityCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Commands/PotionFillCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Commands/PotionFillCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/ConfigFiles.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/ConfigFiles.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Effects/DurationEffects/NoFallEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Effects/DurationEffects/NoFallEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Effects/InstantEffects/FoodHealthRestore.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Effects/InstantEffects/KnockUpEffect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Effects/TaskEffects.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Listeners.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Listeners.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Managers/ArmorManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Managers/ArmorManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Managers/PlayerData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Managers/PlayerData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Managers/PlayerDataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Managers/PlayerDataManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Utils/ArmorAccessories.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Utils/ArmorAccessories.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Utils/ArmorTags.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Utils/ArmorTags.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Utils/SetBonus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Utils/SetBonus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Managers/WeaponManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Managers/WeaponManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/waterraid/KitAbilities/Utils/Debuff.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

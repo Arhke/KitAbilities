@@ -14,11 +14,11 @@ public class PlayerDataManager {
     public HashMap<UUID, PlayerData> dataMap = new HashMap<>();
     private final DataManager dm;
     private final FileManager fm;
-    public PlayerDataManager(Main plugin, FileManager fm, DataManager dm){
+    public PlayerDataManager(FileManager fm, DataManager dm){
         this.fm = fm;
         this.dm = dm;
         for (Player player:Bukkit.getOnlinePlayers()) {
-            dataMap.put(player.getUniqueId(), new PlayerData(plugin, dm.getDataManager(player.getUniqueId().toString()), player));
+            dataMap.put(player.getUniqueId(), new PlayerData(dm.getDataManager(player.getUniqueId().toString()), player));
         }
     }
     public PlayerData getData(UUID uuid){
@@ -32,8 +32,8 @@ public class PlayerDataManager {
         return pd;
     }
 
-    public void registerPlayer(Main plugin, Player player){
-        dataMap.putIfAbsent(player.getUniqueId(), new PlayerData(plugin, dm.getDataManager(player.getUniqueId().toString()), player));
+    public void registerPlayer(Player player){
+        dataMap.putIfAbsent(player.getUniqueId(), new PlayerData(dm.getDataManager(player.getUniqueId().toString()), player));
     }
     public void unregisterPlayer(Player player){
         PlayerData pd = dataMap.remove(player.getUniqueId());

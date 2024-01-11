@@ -21,17 +21,15 @@ public class PlayerData {
     HashMap<Class, DurationEffect> _effectList = new HashMap<>();
     HashMap<PotionEffectType, PotionQueue> potionQueueMap = new HashMap<>();
     public long shieldingCD = 0;
-    public boolean _remove;
-    private static final String AbilityKey = "abilitykit", RemoveKey = "Remove";
+    private static final String AbilityKey = "abilitykit";
     public PlayerData(){}
-    public PlayerData(Main plugin, DataManager dm, Player player){
-        _remove = dm.getBoolean(RemoveKey);
+    public PlayerData(DataManager dm, Player player){
         if (dm.getString(AbilityKey) == null) {
             return;
         }
         try{
             EnumAbilities eak = EnumAbilities.valueOf(dm.getString(AbilityKey));
-            _aks = eak.get(plugin, player);
+            _aks = eak.get(player);
         }catch(IllegalArgumentException ignored){
         }
     }
@@ -68,7 +66,6 @@ public class PlayerData {
         return _effectList.values().iterator();
     }
     public void write(DataManager dm){
-        dm.set(_remove, RemoveKey);
         dm.set(_aks != null? _aks.getID():null, AbilityKey);
     }
     public void addPotionEffect(PotionEffect pe, Player player) {

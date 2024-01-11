@@ -29,8 +29,8 @@ public class Clone extends RightClickAbilities {
     }
     Player target;
     NPC npc;
-    public Clone(Main instance, Player player) {
-        super(instance, player);
+    public Clone(Player player) {
+        super(player);
     }
 
     @Override

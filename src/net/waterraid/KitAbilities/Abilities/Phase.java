@@ -19,8 +19,8 @@ public class Phase extends Abilities {
         setUpAbilityAndItem(11, 0, Material.EYE_OF_ENDER);
     }
     Location tp;
-    public Phase(Main instance, Player player) {
-        super(instance, player);
+    public Phase(Player player) {
+        super(player);
     }
 
 

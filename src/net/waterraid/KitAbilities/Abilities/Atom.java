@@ -19,8 +19,8 @@ public class Atom extends RightClickAbilities {
     }
     int _radius = 5;
 
-    public Atom(Main instance, Player caster) {
-        super(instance, caster);
+    public Atom(Player caster) {
+        super(caster);
     }
 
     //==============================

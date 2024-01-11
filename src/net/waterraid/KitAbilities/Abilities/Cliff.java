@@ -21,8 +21,8 @@ public class Cliff extends OnHitAbilities {
     {
         setUpAbilityAndItem(8, 0, Material.BONE);
     }
-    public Cliff(Main instance, Player player) {
-        super(instance, player);
+    public Cliff(Player player) {
+        super(player);
     }
 
 
@@ -31,25 +31,22 @@ public class Cliff extends OnHitAbilities {
 
     @Override
     protected void doAbility(LivingEntity entity) {
-        if (isTargeteableLivingEntity(entity)) {
-            Player player = (Player) entity;
-            NoFallEffect effect = new NoFallEffect(getPlugin(), player, 8);
-            effect.setFrom(getPlayer());
-            effect.applyEffect();
-            Location loc = player.getLocation();
-            PacketPlayOutWorldParticles packet = new PacketPlayOutWorldParticles(EnumParticle.SLIME, false, (float) (loc.getX()), (float) (loc.getY()), (float) loc.getZ(), 0.5f, 0.0f, 0.5f, 0, 200)   ;
-            Vector v = entity.getVelocity();
-            new BukkitRunnable(){
-                @Override
-                public void run(){
-                    entity.setVelocity(new Vector(v.getX(), 1.2, v.getZ()));
-                    for (Player online : Bukkit.getOnlinePlayers()) {
-                        ((CraftPlayer) online).getHandle().playerConnection.sendPacket(packet);
-                    }
+        Player player = (Player) entity;
+        NoFallEffect effect = new NoFallEffect(getPlugin(), player, 8);
+        effect.setFrom(getPlayer());
+        effect.applyEffect();
+        Location loc = player.getLocation();
+        PacketPlayOutWorldParticles packet = new PacketPlayOutWorldParticles(EnumParticle.SLIME, false, (float) (loc.getX()), (float) (loc.getY()), (float) loc.getZ(), 0.5f, 0.0f, 0.5f, 0, 200)   ;
+        Vector v = entity.getVelocity();
+        new BukkitRunnable(){
+            @Override
+            public void run(){
+                entity.setVelocity(new Vector(v.getX(), 1.2, v.getZ()));
+                for (Player online : Bukkit.getOnlinePlayers()) {
+                    ((CraftPlayer) online).getHandle().playerConnection.sendPacket(packet);
                 }
-            }.runTaskLater(getPlugin(), 0);
-
-        }
+            }
+        }.runTaskLater(getPlugin(), 0);
 
     }
 }

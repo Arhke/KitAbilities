@@ -1,5 +1,6 @@
 package net.waterraid.KitAbilities;
 
+import com.Arhke.ArhkeLib.Lib.Base.Base;
 import com.Arhke.ArhkeLib.Lib.Configs.ConfigFile;
 import com.Arhke.ArhkeLib.Lib.FileIO.DataManager;
 import com.Arhke.ArhkeLib.Lib.FileIO.FileManager;
@@ -29,7 +30,7 @@ public enum ConfigFiles implements ConfigFile {
         public void createConfigDefaults(FileManager fileManager) {
             DataManager dm = fileManager.getDataManager();
             for(EnumAbilities ea:EnumAbilities.values()){
-                DataManager ability = dm.getDataManager(ea.getKitClass().getSimpleName());
+                DataManager ability = dm.getDataManager(Base.capitalize(ea.name()));
                 ability.isOrDefault("&a&lDefault Name", Abilities.NameKey);
                 ability.isOrDefault(Collections.singletonList("&a&lDefault Lore \n CoolDown {0}, CastTime {1}"), Abilities.LoreKey);
             }

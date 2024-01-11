@@ -5,26 +5,22 @@ import net.waterraid.KitAbilities.Main;
 import org.bukkit.entity.Player;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.function.Function;
 
 public enum EnumAbilities {
-    ATOM(Atom.class), BLAZE(Blaze.class), CLIFF(Cliff.class), DODGE(Dodge.class), UNTARGET(Untarget.class),
-    RAGE(Rage.class), REFLECTOR(Reflector.class), SHADOWSTEP(ShadowStep.class), SMASH(Smash.class), PHASE(Phase.class),
-    TANK(Tank.class), HOOKER(Hooker.class), CLONE(Clone.class);
-    final Class<? extends Abilities> _kitClass;
+    ATOM(Atom::new), BLAZE(Blaze::new), CLIFF(Cliff::new), DODGE(Dodge::new), UNTARGET(Untarget::new),
+    RAGE(Rage::new), REFLECTOR(Reflector::new), SHADOWSTEP(ShadowStep::new), SMASH(Smash::new), PHASE(Phase::new),
+    TANK(Tank::new), HOOKER(Hooker::new), CLONE(Clone::new);
+    final Function<Player, Abilities> kitClass;
 
-    EnumAbilities(Class<? extends Abilities> KitClass) {
-        _kitClass = KitClass;
+    EnumAbilities(Function<Player, Abilities> KitClass) {
+        kitClass = KitClass;
     }
 
-    public Abilities get(Main instance, Player player) {
-        try {
-            return _kitClass.getDeclaredConstructor(Main.class, Player.class).newInstance(instance, player);
-        } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
-            e.printStackTrace();
-        }
-        return null;
+    public Abilities get( Player player) {
+        return kitClass.apply(player);
     }
-    public Class<? extends Abilities> getKitClass(){
-        return this._kitClass;
+    public Function<Player, Abilities> getKitClass(){
+        return this.kitClass;
     }
 }

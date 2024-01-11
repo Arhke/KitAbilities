@@ -7,8 +7,8 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 public abstract class RightClickAbilities extends Abilities {
-    public RightClickAbilities(Main instance, Player player) {
-        super(instance, player);
+    public RightClickAbilities(Player player) {
+        super(player);
     }
 
     @Override

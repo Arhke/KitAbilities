@@ -42,7 +42,7 @@ public abstract class Abilities {
     protected BukkitTask _cdTask, _ctTask;
     public static final String NBTIAbility = "AbilityId";
     public static final String NameKey = "Name", MaterialKey = "Material", LoreKey = "Lore";
-    public Abilities(Main instance, Player player){
+    public Abilities(Player player){
         _player = player;
     }
     //=========Events========
@@ -123,26 +123,27 @@ public abstract class Abilities {
 
 
     //============================
-    public void castAbility(LivingEntity entity) {
+    public boolean castAbility(LivingEntity entity) {
         if (entity != null && !isTargeteableLivingEntity(entity)) {
-            return;
+            return false;
         }
         if(isInProtectedRegion(getPlayer())){
             getPlayer().sendMessage(ChatColor.RED + "You may not use this here");
-            return;
+            return false;
         }
         if (isOnCoolDown()) {
             getPlayer().sendMessage(ChatColor.RED + "Abilities Is On CoolDown");
-            return;
+            return false;
         }
         AbilityCastEvent ace = new AbilityCastEvent(getPlayer(), this);
         Bukkit.getPluginManager().callEvent(ace);
-        if (ace.isCancelled()) return;
+        if (ace.isCancelled()) return false;
 
         castCoolDown();
         doAbility(entity);
+        return true;
     }
-    protected abstract void doAbility(LivingEntity entity);
+    protected void doAbility(LivingEntity entity){}
     public void setCoolDown(int CoolDown){
         _cooldown = CoolDown;
     }

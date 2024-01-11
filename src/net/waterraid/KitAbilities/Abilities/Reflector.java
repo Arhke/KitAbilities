@@ -14,8 +14,8 @@ public class Reflector extends RightClickAbilities {
     {
         setUpAbilityAndItem(18, 6, Material.MAGMA_CREAM);
     }
-    public Reflector(Main instance, Player player) {
-        super(instance, player);
+    public Reflector(Player player) {
+        super(player);
     }
     @Override
     protected void doAbility(LivingEntity entity) {

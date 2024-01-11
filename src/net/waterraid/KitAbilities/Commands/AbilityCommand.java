@@ -68,7 +68,7 @@ public class AbilityCommand extends CommandsBase{
                 sender.sendMessage(dm.getTCM(noPerm, dm.getTCM(perm, abilityName)));
                 return true;
             }
-            Abilities ak = ea.get(getPlugin(), player);
+            Abilities ak = ea.get(player);
             for (int i = 0; i < player.getInventory().getContents().length; i++) {
                 if (player.getInventory().getItem(i) != null &&
                         player.getInventory().getItem(i).getType() != Material.AIR

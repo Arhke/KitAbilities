@@ -8,7 +8,7 @@ public class Weapons {
     String _id;
     ItemStack _weapon;
     public static final String NBTIWeapon = "WeaponId";
-    public static final String WeaponKey = "weapons", UpgradeKey = "upgrades";
+    public static final String WeaponKey = "weapons";
     public Weapons(String Id, ItemStack is){
         _id = Id;
         NBTItem nbti = new NBTItem(is);

@@ -13,8 +13,8 @@ public class Untarget extends RightClickAbilities {
     {
         setUpAbilityAndItem(15, 2, Material.FERMENTED_SPIDER_EYE);
     }
-    public Untarget(Main instance, Player player) {
-        super(instance, player);
+    public Untarget(Player player) {
+        super(player);
     }
 
     @Override

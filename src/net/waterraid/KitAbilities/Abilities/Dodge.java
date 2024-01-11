@@ -15,8 +15,8 @@ public class Dodge extends Abilities {
         setUpAbilityAndItem(4, 0, Material.CARROT_STICK);
         _moves = true;
     }
-    public Dodge(Main instance, Player player)  {
-        super(instance, player);
+    public Dodge(Player player)  {
+        super(player);
     }
     @Override
     public void onEvent(PlayerInteractEvent event){

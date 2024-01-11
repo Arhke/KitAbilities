@@ -13,8 +13,8 @@ public class Rage extends RightClickAbilities {
     {
         setUpAbilityAndItem(15, 5, Material.FLINT_AND_STEEL);
     }
-    public Rage(Main instance, Player player) {
-        super(instance, player);
+    public Rage(Player player) {
+        super(player);
     }
 
     @Override

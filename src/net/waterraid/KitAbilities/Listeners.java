@@ -206,7 +206,6 @@ public class Listeners implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onEquip(ArmorEquipEvent1_8 event){
-        System.out.println("Caught " + event.getPlayer());
         if(event.getType() == null)return;
         HashSet<SetBonus> oldbonuses = new HashSet<>(), newbonuses = new HashSet<>();
         if(event.getOldArmorPiece()!= null && event.getOldArmorPiece().getType() != Material.AIR){
@@ -327,16 +326,6 @@ public class Listeners implements Listener {
         }
         if (event.getDamager() instanceof Player) {
             Player player = (Player)event.getDamager();
-            int ret = 0;
-            for (ItemStack is : ((Player) event.getDamager()).getInventory().getArmorContents()) {
-                if (is != null && is.getType() != Material.AIR) {
-                    ret += ArmorAccessories.parseCustom(is).getCustomAttr().getOrDefault(Attributes.CustomAttributes.DAMAGE, 0);
-                }
-            }
-            event.setDamage(Math.max(0.0001, event.getDamage() + ret));
-
-
-
             PlayerData pd = Main.getPlugin().getPDManager().getData(event.getDamager().getUniqueId());
             if (pd != null) {
                 Iterator<DurationEffect> iterator = pd.getEffectIterator();
@@ -346,43 +335,6 @@ public class Listeners implements Listener {
                     else effects.onEvent(event);
                 }
                 if (pd.getAbilityKit() != null) pd.getAbilityKit().onEvent(event);
-            }
-            Set<SetBonus> bonuses = SetBonus.parsePlayer(player);
-            PluginManager pm = Bukkit.getPluginManager();
-            if(bonuses.contains(SetBonus.VAMPIRE)){
-                EntityRegainHealthEvent ere = new EntityRegainHealthEvent(player,1d, EntityRegainHealthEvent.RegainReason.CUSTOM);
-                pm.callEvent(ere);
-                if(!ere.isCancelled())
-                player.setHealth(Math.min(ere.getAmount() + player.getHealth(), player.getMaxHealth()));
-            }
-            if(bonuses.contains(SetBonus.LIFESTEAL)){
-                EntityRegainHealthEvent ere = new EntityRegainHealthEvent(player,event.getFinalDamage(), EntityRegainHealthEvent.RegainReason.CUSTOM);
-                pm.callEvent(ere);
-                if(!ere.isCancelled())
-                    player.setHealth(Math.min(ere.getAmount() + player.getHealth(), player.getMaxHealth()));
-            }
-            if(bonuses.contains(SetBonus.POISONOUS) && event.getEntity() instanceof LivingEntity){
-                LivingEntity le = (LivingEntity) event.getEntity();
-                le.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 60, 1, false, false));
-            }
-            if(bonuses.contains(SetBonus.VENOMOUS) && event.getEntity() instanceof LivingEntity){
-                LivingEntity le = (LivingEntity) event.getEntity();
-                le.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 60, 2, false, false));
-            }
-            if(bonuses.contains(SetBonus.WITHERING) && event.getEntity() instanceof LivingEntity){
-                LivingEntity le = (LivingEntity) event.getEntity();
-                le.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 60, 1, false, false));
-            }
-            if(bonuses.contains(SetBonus.DECAYING) && event.getEntity() instanceof LivingEntity){
-                LivingEntity le = (LivingEntity) event.getEntity();
-                le.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 60, 2, false, false));
-            }
-            if(bonuses.contains(SetBonus.FEVERISH) && event.getEntity() instanceof LivingEntity){
-                LivingEntity le = (LivingEntity) event.getEntity();
-                le.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 120, 2, false, false));
-            }if(bonuses.contains(SetBonus.DAZZLING) && event.getEntity() instanceof LivingEntity){
-                LivingEntity le = (LivingEntity) event.getEntity();
-                le.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 60, 2, false, false));
             }
 
         }
@@ -407,20 +359,6 @@ public class Listeners implements Listener {
                 }
                 Player player = (CraftPlayer)ps;
                 Set<SetBonus> bonuses = SetBonus.parsePlayer(player);
-                PluginManager pm = Bukkit.getPluginManager();
-                if (bonuses.contains(SetBonus.VAMPIRE)) {
-                    EntityRegainHealthEvent ere = new EntityRegainHealthEvent(player, 1d, EntityRegainHealthEvent.RegainReason.CUSTOM);
-                    pm.callEvent(ere);
-                    if(!ere.isCancelled())
-
-                        player.setHealth(Math.min(ere.getAmount() + player.getHealth(), player.getMaxHealth()));
-                }
-                if (bonuses.contains(SetBonus.LIFESTEAL)) {
-                    EntityRegainHealthEvent ere = new EntityRegainHealthEvent(player, event.getFinalDamage(), EntityRegainHealthEvent.RegainReason.CUSTOM);
-                    pm.callEvent(ere);
-                    if(!ere.isCancelled())
-                        player.setHealth(Math.min(ere.getAmount() + player.getHealth(), player.getMaxHealth()));
-                }
             }
 
         } else if (event.getDamager() instanceof FishHook) {
@@ -540,7 +478,7 @@ public class Listeners implements Listener {
         if (!(event.getDamager() instanceof Player || event.getDamager() instanceof Arrow) ||
                 !(event.getEntity() instanceof LivingEntity) || event.getEntity() instanceof ArmorStand) return;
         LivingEntity entity = (LivingEntity) event.getEntity();
-        int dmg = (int)(10*(Math.ceil(entity.getHealth()) - Math.max(Math.ceil(entity.getHealth() - event.getFinalDamage()), 0)));
+        int dmg = (int)(10*Math.min(entity.getHealth(), event.getFinalDamage()));
 //        String health = dmg % 2 == 1 ? ChatColor.BLACK + "❤" : "";
 //        for (int i = 0; i < dmg / 2; i++) {
 //            health = "❤" + health;
@@ -554,7 +492,7 @@ public class Listeners implements Listener {
         if (event.getDamager() == null ||
                 event.getEntity() == null || event.getEntity() instanceof ArmorStand) return;
         LivingEntity entity = event.getEntity();
-        int dmg = (int)(10*(Math.ceil(entity.getHealth()) - Math.max(Math.ceil(entity.getHealth() - event.getDamage()), 0)));
+        int dmg = (int)(10*Math.min(entity.getHealth(), event.getDamage()));
 //        String health = dmg % 2 == 1 ? ChatColor.BLACK + "❤" : "";
 //        for (int i = 0; i < dmg / 2; i++) {
 //            health = "❤" + health;
@@ -655,7 +593,7 @@ public class Listeners implements Listener {
         if(!event.getPlayer().hasPlayedBefore()){
             event.getPlayer().playSound(event.getPlayer().getLocation(), Sound.ENDERDRAGON_GROWL, 3, 3);
         }
-        Main.getPlugin().getPDManager().registerPlayer(Main.getPlugin(), event.getPlayer());
+        Main.getPlugin().getPDManager().registerPlayer(event.getPlayer());
     }
 
     @EventHandler

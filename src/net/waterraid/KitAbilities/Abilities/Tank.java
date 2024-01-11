@@ -17,8 +17,8 @@ public class Tank extends RightClickAbilities {
         setUpAbilityAndItem(6, 1, new ItemStack(Material.INK_SACK, 1, (short) 0, (byte) 11));
 
     }
-    public Tank(Main instance, Player player) {
-        super(instance, player);
+    public Tank(Player player) {
+        super(player);
     }
 
     @Override

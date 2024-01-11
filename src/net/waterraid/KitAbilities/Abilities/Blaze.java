@@ -15,8 +15,8 @@ public class Blaze extends RightClickAbilities {
     {
         setUpAbilityAndItem(5, 5, Material.BLAZE_POWDER);
     }
-    public Blaze(Main instance, Player player) {
-        super(instance, player);
+    public Blaze(Player player) {
+        super(player);
     }
 
     //=======================

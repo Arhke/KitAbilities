@@ -9,8 +9,8 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public abstract class OnHitAbilities extends Abilities {
 
 
-    public OnHitAbilities(Main instance, Player player) {
-        super(instance, player);
+    public OnHitAbilities(Player player) {
+        super(player);
     }
 
     @Override

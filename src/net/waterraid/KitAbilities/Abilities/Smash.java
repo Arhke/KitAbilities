@@ -18,8 +18,8 @@ public class Smash extends OnHitAbilities {
     {
         setUpAbilityAndItem(10, 0, Material.RABBIT_HIDE);
     }
-    public Smash(Main instance, Player player) {
-        super(instance, player);
+    public Smash(Player player) {
+        super(player);
     }
 
     @Override

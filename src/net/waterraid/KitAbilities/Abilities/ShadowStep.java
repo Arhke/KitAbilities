@@ -16,8 +16,8 @@ public class ShadowStep extends RightClickAbilities{
     {
         setUpAbilityAndItem(8, 6, Material.COAL);
     }
-    public ShadowStep(Main instance, Player player) {
-        super(instance, player);
+    public ShadowStep(Player player) {
+        super(player);
     }
     @Override
     protected void doAbility(LivingEntity entity) {

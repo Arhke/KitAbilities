@@ -5,7 +5,7 @@ import org.bukkit.entity.Player;
 
 public abstract class ChargeHitAbilities extends Abilities{
 
-    public ChargeHitAbilities(Main instance, Player player) {
-        super(instance, player);
+    public ChargeHitAbilities(Player player) {
+        super(player);
     }
 }

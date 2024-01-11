@@ -29,8 +29,8 @@ public class Hooker extends Abilities {
         _is.setItemMeta(im);
     }
 
-    public Hooker(Main instance, Player player) {
-        super(instance, player);
+    public Hooker(Player player) {
+        super(player);
     }
 
 
