@@ -18,7 +18,7 @@ import java.util.Iterator;
 public class PlayerData {
     /* Nullable value */
     Abilities _aks;
-    HashMap<Class, DurationEffect> _effectList = new HashMap<>();
+    HashMap<Class<? extends DurationEffect>, DurationEffect> _effectList = new HashMap<>();
     HashMap<PotionEffectType, PotionQueue> potionQueueMap = new HashMap<>();
     public long shieldingCD = 0;
     private static final String AbilityKey = "abilitykit";

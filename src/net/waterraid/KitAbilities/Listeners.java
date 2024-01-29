@@ -478,12 +478,13 @@ public class Listeners implements Listener {
         if (!(event.getDamager() instanceof Player || event.getDamager() instanceof Arrow) ||
                 !(event.getEntity() instanceof LivingEntity) || event.getEntity() instanceof ArmorStand) return;
         LivingEntity entity = (LivingEntity) event.getEntity();
-        int dmg = (int)(10*Math.min(entity.getHealth(), event.getFinalDamage()));
-//        String health = dmg % 2 == 1 ? ChatColor.BLACK + "❤" : "";
-//        for (int i = 0; i < dmg / 2; i++) {
-//            health = "❤" + health;
-//        }
-        String health = (dmg/10d) + "";
+        int dmg = (int)Math.min(entity.getHealth(), event.getFinalDamage());
+        String health = dmg % 2 == 1 ? ChatColor.BLACK + "❤" : "";
+        for (int i = 0; i < dmg / 2; i++) {
+            health = "❤" + health;
+        }
+//        String health = (dmg/10d) + "";
+
         setDamageIndicator(entity, health, entity.getVelocity().clone(), event.getDamager().getFallDistance() > 0 && !event.getDamager().isOnGround());
     }
 
@@ -492,12 +493,12 @@ public class Listeners implements Listener {
         if (event.getDamager() == null ||
                 event.getEntity() == null || event.getEntity() instanceof ArmorStand) return;
         LivingEntity entity = event.getEntity();
-        int dmg = (int)(10*Math.min(entity.getHealth(), event.getDamage()));
-//        String health = dmg % 2 == 1 ? ChatColor.BLACK + "❤" : "";
-//        for (int i = 0; i < dmg / 2; i++) {
-//            health = "❤" + health;
-//        }
-        final String hearts = (dmg/10d) + "";
+        int dmg = (int)(Math.min(entity.getHealth(), event.getDamage()));
+        String health = dmg % 2 == 1 ? ChatColor.BLACK + "❤" : "";
+        for (int i = 0; i < dmg / 2; i++) {
+            health = "❤" + health;
+        }
+        String finalHealth = health;
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -508,7 +509,7 @@ public class Listeners implements Listener {
                 armorstand.setSmall(true);
                 armorstand.setMarker(true);
                 armorstand.setCustomNameVisible(true);
-                armorstand.setCustomName(ChatColor.WHITE + "-" + hearts + ChatColor.WHITE + "*");
+                armorstand.setCustomName(ChatColor.WHITE + "-" + finalHealth + ChatColor.WHITE + "*");
                 setTicksLived(armorstand, 19);
             }
         }.runTaskLater(Main.getPlugin(), 1);
@@ -524,6 +525,7 @@ public class Listeners implements Listener {
                 if (effects.isExpired()) iterator.remove();
                 else effects.onEvent(event);
             }
+
         }
     }
 
@@ -560,15 +562,15 @@ public class Listeners implements Listener {
         }
         event.setAmount(event.getAmount()*(1+ret/100));
 
-        double heal = ((int) ((Math.min(event.getAmount(), player.getMaxHealth() - player.getHealth()))*10))/10d;
-//        String health = heal % 2 == 1 ? ChatColor.BLACK + "❤" + ChatColor.GREEN + "✔" : "✔";
-//        for (int i = 0; i < heal / 2; i++) {
-//            health = "❤" + health;
-//        }
+        int heal = ((int) ((Math.min(event.getAmount(), player.getMaxHealth() - player.getHealth()))));
+        String health = heal % 2 == 1 ? ChatColor.BLACK + "❤" + ChatColor.GREEN + "✔" : "✔";
+        for (int i = 0; i < heal / 2; i++) {
+            health = "❤" + health;
+        }
 
         ArmorStand armorstand = (ArmorStand) player.getWorld().spawnEntity(player.getEyeLocation(), EntityType.ARMOR_STAND);
         armorstand.setVisible(false);
-        armorstand.setCustomName(ChatColor.BOLD + "" + ChatColor.GREEN + "+" + heal);
+        armorstand.setCustomName(ChatColor.BOLD + "" + ChatColor.GREEN + "+" + health);
         armorstand.setGravity(true);
         armorstand.setVelocity(new Vector(Math.random() * 0.4 - 0.2, 0, Math.random() * 0.4 - 0.2).add(player.getVelocity()));
         armorstand.setSmall(true);

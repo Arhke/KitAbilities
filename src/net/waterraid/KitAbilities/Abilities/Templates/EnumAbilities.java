@@ -17,7 +17,7 @@ public enum EnumAbilities {
         kitClass = KitClass;
     }
 
-    public Abilities get( Player player) {
+    public Abilities get(Player player) {
         return kitClass.apply(player);
     }
     public Function<Player, Abilities> getKitClass(){

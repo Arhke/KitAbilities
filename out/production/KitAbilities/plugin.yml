@@ -16,3 +16,5 @@ commands:
     usage: /<command>
   weapon:
     usage: /<command>
+  kit:
+    usage: /<command>

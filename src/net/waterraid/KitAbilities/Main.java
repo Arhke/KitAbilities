@@ -2,11 +2,11 @@ package net.waterraid.KitAbilities;
 
 import com.Arhke.ArhkeLib.Lib.Base.CommandsBase;
 import com.Arhke.ArhkeLib.Lib.Base.PluginBase;
-import com.Arhke.ArhkeLib.Lib.FileIO.DataManager;
+import com.Arhke.ArhkeLib.Lib.FileIO.ConfigManager;
 import com.Arhke.ArhkeLib.Lib.FileIO.FileManager;
 import com.Arhke.ArhkeLib.Lib.Hook.Plugins;
 import net.waterraid.KitAbilities.Commands.*;
-import net.waterraid.KitAbilities.Managers.ArmorManager;
+import net.waterraid.KitAbilities.Managers.ItemManager;
 import net.waterraid.KitAbilities.Managers.PlayerDataManager;
 import net.waterraid.KitAbilities.Managers.WeaponManager;
 import org.bukkit.Bukkit;
@@ -14,8 +14,6 @@ import org.bukkit.ChatColor;
 
 import java.io.File;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Main extends PluginBase {
     /**
@@ -28,7 +26,7 @@ public class Main extends PluginBase {
      * @param interval The time interval if you need to manipulate that too (in ticks)
      */
     static Main _plugin;
-    ArmorManager _armorManager;
+    ItemManager _armorManager;
     PlayerDataManager pdManager;
     WeaponManager _weaponManager;
 
@@ -47,15 +45,15 @@ public class Main extends PluginBase {
         FileManager data = new FileManager(_dataFile);
 
 
-        _armorManager = new ArmorManager(data, data.getDataManager().getDataManager(ArmorKey));
+//        _armorManager = new ItemManager(new ConfigManager());
+        registerGUI();
         pdManager = new PlayerDataManager(data, data.getDataManager().getDataManager(PlayerDataKey));
         _weaponManager = new WeaponManager(data, data.getDataManager().getDataManager(WeaponKey));
-        CommandsBase armor = new ArmorCommand("armor", getConfig(ConfigFiles.ArmorLang)),
+        CommandsBase setup = new SetupCommand("kit", getConfig(ConfigFiles.KitLang)),
                 effects = new EffectsCommand("effects", getConfig(ConfigFiles.EffectLang)), pf = new PotionFillCommand("potionfill", getConfig(ConfigFiles.EffectLang)),
                 weapon = new WeaponCommand("weapon", getConfig(ConfigFiles.EffectLang));
-        getCommand(armor.getCmd()).setExecutor(armor);
         AbilityCommand ability = new AbilityCommand(getConfig(ConfigFiles.AbilityLang));
-        registerCommands(ability);
+        registerCommands(ability,setup);
         getCommand(effects.getCmd()).setExecutor(effects);
         getCommand(pf.getCmd()).setExecutor(pf);
         getCommand("pf").setExecutor(pf);
@@ -64,6 +62,7 @@ public class Main extends PluginBase {
         registerHooks(Plugins.PLACEHOLDERAPI, Plugins.VAULT);
         registerCustomEvents(8);
         getHook().registerPlaceholderAPI("ABILITY", (p, s)-> getPlugin().getPDManager().getData(p.getUniqueId()).getAbilityKit().getItemStack().getItemMeta().getDisplayName() + " " + ChatColor.GRAY);
+        registerCustomAttributeEvents();
 
     }
     @Override
@@ -71,16 +70,7 @@ public class Main extends PluginBase {
         pdManager.unregisterAll();
 //        deleteDirectory(Paths.get(getDataFolder().getParentFile().toString(), "MythicMobs", "SavedData").toFile());
     }
-    boolean deleteDirectory(File directoryToBeDeleted) {
-        File[] allContents = directoryToBeDeleted.listFiles();
-        if (allContents != null) {
-            for (File file : allContents) {
-                deleteDirectory(file);
-            }
-        }
-        return directoryToBeDeleted.delete();
-    }
-    public ArmorManager getArmorManager() {
+    public ItemManager getArmorManager() {
         return _armorManager;
     }
     public PlayerDataManager getPDManager() {

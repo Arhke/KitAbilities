@@ -25,6 +25,11 @@ public enum ConfigFiles implements ConfigFile {
         public void createConfigDefaults(FileManager fileManager) {
 
         }
+    }, KitLang("Lang","KitCommand.yml") {
+        @Override
+        public void createConfigDefaults(FileManager fileManager) {
+
+        }
     }, AbilityConfig("abilities.yml"){
         @Override
         public void createConfigDefaults(FileManager fileManager) {
