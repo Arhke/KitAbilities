@@ -1,11 +1,11 @@
 package net.waterraid.KitAbilities.Commands.AbilityCommands;
 
-import com.Arhke.ArhkeLib.Lib.Base.CommandsBase;
-import com.Arhke.ArhkeLib.Lib.Base.SubCommandsBase;
+import com.Arhke.ArhkeLib.Base.CommandsBase;
+import com.Arhke.ArhkeLib.Base.SubCommandsBase;
 import net.waterraid.KitAbilities.Abilities.Templates.EnumAbilities;
 import org.bukkit.entity.Player;
 
-import static com.Arhke.ArhkeLib.Lib.Base.Base.tcm;
+import static com.Arhke.ArhkeLib.Base.Base.tcm;
 
 public class ListCommand extends SubCommandsBase {
 

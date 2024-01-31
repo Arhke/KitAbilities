@@ -1,6 +1,6 @@
 package net.waterraid.KitAbilities.Abilities;
 
-import com.Arhke.ArhkeLib.Lib.Utils.Directions.Direction3D;
+import com.Arhke.ArhkeLib.Utils.Directions.Direction3D;
 import net.waterraid.KitAbilities.Abilities.Templates.Abilities;
 import net.waterraid.KitAbilities.Main;
 import org.bukkit.ChatColor;

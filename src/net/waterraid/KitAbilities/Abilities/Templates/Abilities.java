@@ -1,6 +1,6 @@
 package net.waterraid.KitAbilities.Abilities.Templates;
 
-import com.Arhke.ArhkeLib.Lib.FileIO.DataManager;
+import com.Arhke.ArhkeLib.FileIO.DataManager;
 import de.tr7zw.nbtapi.NBTItem;
 import net.waterraid.KitAbilities.ConfigFiles;
 import net.waterraid.KitAbilities.Main;
@@ -26,8 +26,8 @@ import org.bukkit.scheduler.BukkitTask;
 
 import java.util.List;
 
-import static com.Arhke.ArhkeLib.Lib.Base.Base.roundInt;
-import static com.Arhke.ArhkeLib.Lib.Base.Base.tcm;
+import static com.Arhke.ArhkeLib.Base.Base.roundInt;
+import static com.Arhke.ArhkeLib.Base.Base.tcm;
 import static net.waterraid.KitAbilities.Abilities.Clone.isTargeteableLivingEntity;
 import static net.waterraid.KitAbilities.Abilities.Clone.isInProtectedRegion;
 import static net.waterraid.KitAbilities.Main.getPlugin;

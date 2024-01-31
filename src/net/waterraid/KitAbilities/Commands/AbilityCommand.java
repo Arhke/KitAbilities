@@ -1,7 +1,7 @@
 package net.waterraid.KitAbilities.Commands;
 
-import com.Arhke.ArhkeLib.Lib.Base.CommandsBase;
-import com.Arhke.ArhkeLib.Lib.FileIO.ConfigManager;
+import com.Arhke.ArhkeLib.Base.CommandsBase;
+import com.Arhke.ArhkeLib.FileIO.ConfigManager;
 import de.tr7zw.nbtapi.NBTItem;
 import net.waterraid.KitAbilities.Abilities.Templates.Abilities;
 import net.waterraid.KitAbilities.Abilities.Templates.EnumAbilities;
@@ -17,7 +17,7 @@ import org.bukkit.entity.Player;
 
 import java.util.Arrays;
 
-import static com.Arhke.ArhkeLib.Lib.Base.Base.tcm;
+import static com.Arhke.ArhkeLib.Base.Base.tcm;
 import static net.waterraid.KitAbilities.Main.getPlugin;
 
 public class AbilityCommand extends CommandsBase{

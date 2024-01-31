@@ -1,9 +1,9 @@
 package net.waterraid.KitAbilities.Armor;
 
-import com.Arhke.ArhkeLib.Lib.Base.Base;
-import com.Arhke.ArhkeLib.Lib.CustomEvents.ArmorEquipEvent1_8;
-import com.Arhke.ArhkeLib.Lib.CustomEvents.ArmorType;
-import com.Arhke.ArhkeLib.Lib.FileIO.DataManager;
+import com.Arhke.ArhkeLib.Base.Base;
+import com.Arhke.ArhkeLib.CustomEvents.ArmorEquipEvent1_8;
+import com.Arhke.ArhkeLib.CustomEvents.ArmorType;
+import com.Arhke.ArhkeLib.FileIO.DataManager;
 import de.tr7zw.nbtapi.NBTItem;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;

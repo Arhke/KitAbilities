@@ -1,6 +1,6 @@
 package net.waterraid.KitAbilities.Armor;
 
-import com.Arhke.ArhkeLib.Lib.FileIO.DataManager;
+import com.Arhke.ArhkeLib.FileIO.DataManager;
 import de.tr7zw.nbtapi.NBTItem;
 import org.bukkit.inventory.ItemStack;
 

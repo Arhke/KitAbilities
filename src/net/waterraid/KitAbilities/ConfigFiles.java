@@ -1,9 +1,9 @@
 package net.waterraid.KitAbilities;
 
-import com.Arhke.ArhkeLib.Lib.Base.Base;
-import com.Arhke.ArhkeLib.Lib.Configs.ConfigFile;
-import com.Arhke.ArhkeLib.Lib.FileIO.DataManager;
-import com.Arhke.ArhkeLib.Lib.FileIO.FileManager;
+import com.Arhke.ArhkeLib.Base.Base;
+import com.Arhke.ArhkeLib.Configs.ConfigFile;
+import com.Arhke.ArhkeLib.FileIO.DataManager;
+import com.Arhke.ArhkeLib.FileIO.FileManager;
 import net.waterraid.KitAbilities.Abilities.Templates.Abilities;
 import net.waterraid.KitAbilities.Abilities.Templates.EnumAbilities;
 

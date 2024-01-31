@@ -1,7 +1,7 @@
 package net.waterraid.KitAbilities.Utils;
 
 
-import com.Arhke.ArhkeLib.Lib.FileIO.DataManager;
+import com.Arhke.ArhkeLib.FileIO.DataManager;
 
 public class Vector2D {
 

@@ -1,10 +1,9 @@
 package net.waterraid.KitAbilities;
 
-import com.Arhke.ArhkeLib.Lib.Base.CommandsBase;
-import com.Arhke.ArhkeLib.Lib.Base.PluginBase;
-import com.Arhke.ArhkeLib.Lib.FileIO.ConfigManager;
-import com.Arhke.ArhkeLib.Lib.FileIO.FileManager;
-import com.Arhke.ArhkeLib.Lib.Hook.Plugins;
+import com.Arhke.ArhkeLib.Base.CommandsBase;
+import com.Arhke.ArhkeLib.Base.PluginBase;
+import com.Arhke.ArhkeLib.FileIO.FileManager;
+import com.Arhke.ArhkeLib.Hook.Plugins;
 import net.waterraid.KitAbilities.Commands.*;
 import net.waterraid.KitAbilities.Managers.ItemManager;
 import net.waterraid.KitAbilities.Managers.PlayerDataManager;

@@ -1,7 +1,7 @@
 package net.waterraid.KitAbilities.Commands.AbilityCommands;
 
-import com.Arhke.ArhkeLib.Lib.Base.CommandsBase;
-import com.Arhke.ArhkeLib.Lib.Base.SubCommandsBase;
+import com.Arhke.ArhkeLib.Base.CommandsBase;
+import com.Arhke.ArhkeLib.Base.SubCommandsBase;
 import net.waterraid.KitAbilities.ConfigFiles;
 import org.bukkit.entity.Player;
 

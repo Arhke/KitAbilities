@@ -1,7 +1,7 @@
 package net.waterraid.KitAbilities.Commands;
 
-import com.Arhke.ArhkeLib.Lib.Base.CommandsBase;
-import com.Arhke.ArhkeLib.Lib.FileIO.ConfigManager;
+import com.Arhke.ArhkeLib.Base.CommandsBase;
+import com.Arhke.ArhkeLib.FileIO.ConfigManager;
 import net.waterraid.KitAbilities.Managers.PlayerData;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -13,7 +13,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionType;
 
-import static com.Arhke.ArhkeLib.Lib.Base.Base.tcm;
+import static com.Arhke.ArhkeLib.Base.Base.tcm;
 import static net.waterraid.KitAbilities.Main.getPlugin;
 
 public class PotionFillCommand extends CommandsBase implements CommandExecutor {

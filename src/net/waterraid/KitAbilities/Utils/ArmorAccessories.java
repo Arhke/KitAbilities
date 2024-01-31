@@ -1,6 +1,8 @@
 package net.waterraid.KitAbilities.Utils;
 
-import com.Arhke.ArhkeLib.Lib.Base.Base;
+import com.Arhke.ArhkeLib.Base.Base;
+import com.Arhke.ArhkeLib.ItemUtil.CustomItem.ArmorTags;
+import com.Arhke.ArhkeLib.ItemUtil.CustomItem.Attributes;
 import de.tr7zw.nbtapi.NBTItem;
 import org.bukkit.ChatColor;
 import org.bukkit.inventory.ItemStack;
@@ -8,7 +10,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.*;
 
-import static com.Arhke.ArhkeLib.Lib.Base.Base.tcm;
+import static com.Arhke.ArhkeLib.Base.Base.tcm;
 
 public class ArmorAccessories {
 
@@ -186,13 +188,13 @@ public class ArmorAccessories {
             if ((i = mcAttr.putIfAbsent(entry.getKey(), Math.min(100, entry.getValue()))) != null) {
                 mcAttr.put(entry.getKey(), i + entry.getValue());
             }
-            if(entry.getKey() == Attributes.MCAttributes.SPEED){
-                at.applyTag(entry.getKey(), ArmorTags.Operations.ADD, 0.001*entry.getValue());
-            }else if(entry.getKey() == Attributes.MCAttributes.KNOCKBACKRESIST) {
-                at.applyTag(entry.getKey(), ArmorTags.Operations.ADD, 0.01*entry.getValue());
-            }else if(entry.getKey() == Attributes.MCAttributes.MAXHEALTH){
-                at.applyTag(entry.getKey(), ArmorTags.Operations.MULTIPLY, entry.getValue()*0.01d);
-            }
+//            if(entry.getKey() == Attributes.MCAttributes.SPEED){
+//                at.applyTag(entry.getKey(), ArmorTags.Operations.ADD, 0.001*entry.getValue());
+//            }else if(entry.getKey() == Attributes.MCAttributes.KNOCKBACKRESIST) {
+//                at.applyTag(entry.getKey(), ArmorTags.Operations.ADD, 0.01*entry.getValue());
+//            }else if(entry.getKey() == Attributes.MCAttributes.MAXHEALTH){
+//                at.applyTag(entry.getKey(), ArmorTags.Operations.MULTIPLY, entry.getValue()*0.01d);
+//            }
 
         }
         at.hideFlags(ArmorTags.Flag.ATTRIBUTEMODIFIERS);

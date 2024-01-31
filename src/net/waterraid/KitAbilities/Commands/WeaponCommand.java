@@ -1,7 +1,7 @@
 package net.waterraid.KitAbilities.Commands;
 
-import com.Arhke.ArhkeLib.Lib.Base.CommandsBase;
-import com.Arhke.ArhkeLib.Lib.FileIO.ConfigManager;
+import com.Arhke.ArhkeLib.Base.CommandsBase;
+import com.Arhke.ArhkeLib.FileIO.ConfigManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 

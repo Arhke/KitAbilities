@@ -1,59 +1,10 @@
 package net.waterraid.KitAbilities.Utils;
 
-import com.Arhke.ArhkeLib.Lib.Base.Base;
-import com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.ArmorTags;
-import com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.Attributes;
-import com.Arhke.ArhkeLib.Lib.ItemUtil.EquipmentType;
-import com.Arhke.ArhkeLib.VDC.v19.CustomProtectionCalculation;
-import de.tr7zw.nbtapi.NBTItem;
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.Sound;
-import org.bukkit.entity.Arrow;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
-import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.EntityRegainHealthEvent;
-import org.bukkit.event.entity.FoodLevelChangeEvent;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.player.PlayerItemDamageEvent;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
-import static com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.ArmorTags.hasPlayerEffect;
-import java.util.Objects;
-
-import com.Arhke.ArhkeLib.Lib.Base.Base;
-import com.Arhke.ArhkeLib.Lib.ItemUtil.EquipmentType;
-import com.Arhke.ArhkeLib.VDC.v19.CustomProtectionCalculation;
-import de.tr7zw.nbtapi.NBTItem;
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.Sound;
-import org.bukkit.entity.Arrow;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
-import org.bukkit.event.Listener;
-import org.bukkit.event.entity.*;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.player.PlayerItemDamageEvent;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
-
-import java.util.Objects;
-
 //public class CustomAttributeListener implements Listener {
 //    @EventHandler
 //    public void durabilityEvent(PlayerItemDamageEvent event) {
 //        NBTItem nbti = new NBTItem(event.getItem());
-//        double value = com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.ArmorTags.getCustomTagDouble(nbti, com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.ArmorTags.Slot.MAINHAND.getCode(), com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.Attributes.CustomAttributes.DURABILITY);
+//        double value = com.Arhke.ArhkeLib.ItemUtil.CustomItem.ArmorTags.getCustomTagDouble(nbti, com.Arhke.ArhkeLib.ItemUtil.CustomItem.ArmorTags.Slot.MAINHAND.getCode(), com.Arhke.ArhkeLib.ItemUtil.CustomItem.Attributes.CustomAttributes.DURABILITY);
 //        value = event.getDamage() / Math.max(0.0001d, 1d + value);
 //        event.setDamage((int) value);
 //        value = value - (int) value;
@@ -70,19 +21,19 @@ import java.util.Objects;
 //            //Deflect
 //            if (event.getEntity() instanceof Player) {
 //                Player player = (Player) event.getEntity();
-//                if (Base.randNum(100) < com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.ArmorTags.getPlayerAttribute(player, com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.Attributes.CustomAttributes.DEFLECT) * 100) {
+//                if (Base.randNum(100) < com.Arhke.ArhkeLib.ItemUtil.CustomItem.ArmorTags.getPlayerAttribute(player, com.Arhke.ArhkeLib.ItemUtil.CustomItem.Attributes.CustomAttributes.DEFLECT) * 100) {
 //                    player.getWorld().playSound(player.getLocation(), Sound.ANVIL_LAND, 3, 3);
 //                    event.setCancelled(true);
 //                    return;
 //                }
 //                double damage = event.getDamage();
 //                //defense
-//                damage = Math.max(0.001, damage - com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.ArmorTags.getPlayerAttribute(player, com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.Attributes.CustomAttributes.DEFENSE));
+//                damage = Math.max(0.001, damage - com.Arhke.ArhkeLib.ItemUtil.CustomItem.ArmorTags.getPlayerAttribute(player, com.Arhke.ArhkeLib.ItemUtil.CustomItem.Attributes.CustomAttributes.DEFENSE));
 //                event.setDamage(damage);
 //            }
 //            if (event.getDamager() instanceof Arrow && ((Arrow) event.getDamager()).getShooter() instanceof Player && event.getEntity() instanceof LivingEntity) {
 //                Player player = (Player) ((Arrow) event.getDamager()).getShooter();
-//                double damage = event.getDamage() * Math.max(0, 1 + com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.ArmorTags.getPlayerAttribute(player, com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.Attributes.CustomAttributes.RANGEDDAMAGE));
+//                double damage = event.getDamage() * Math.max(0, 1 + com.Arhke.ArhkeLib.ItemUtil.CustomItem.ArmorTags.getPlayerAttribute(player, com.Arhke.ArhkeLib.ItemUtil.CustomItem.Attributes.CustomAttributes.RANGEDDAMAGE));
 //                //toughness
 //                double toughness = ((LivingEntity) event.getEntity()).getAttribute(Attribute.GENERIC_ARMOR_TOUGHNESS).getValue();
 //                damage *= (1f - Math.min(Math.max((damage * toughness - 120) / (damage * toughness + 0.0000001), 0f), 0.9f));
@@ -93,14 +44,14 @@ import java.util.Objects;
 //            //DODGE
 //            if (event.getEntity() instanceof Player) {
 //                Player player = (Player) event.getEntity();
-//                if (Base.randNum(100) < com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.ArmorTags.getPlayerAttribute(player, com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.Attributes.CustomAttributes.DODGE) * 100) {
+//                if (Base.randNum(100) < com.Arhke.ArhkeLib.ItemUtil.CustomItem.ArmorTags.getPlayerAttribute(player, com.Arhke.ArhkeLib.ItemUtil.CustomItem.Attributes.CustomAttributes.DODGE) * 100) {
 //                    player.getWorld().playSound(player.getLocation(), Sound.BAT_TAKEOFF, 3, 3);
 //                    event.setCancelled(true);
 //                    return;
 //                }
 //                double damage = event.getDamage();
 //                //defense
-//                damage = Math.max(0.001, damage - com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.ArmorTags.getPlayerAttribute(player, com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.Attributes.CustomAttributes.DEFENSE));
+//                damage = Math.max(0.001, damage - com.Arhke.ArhkeLib.ItemUtil.CustomItem.ArmorTags.getPlayerAttribute(player, com.Arhke.ArhkeLib.ItemUtil.CustomItem.Attributes.CustomAttributes.DEFENSE));
 //                event.setDamage(damage);
 //            }
 //            if (event.getDamager() instanceof Player && event.getEntity() instanceof LivingEntity) {
@@ -108,28 +59,28 @@ import java.util.Objects;
 //                LivingEntity le = (LivingEntity) event.getEntity();
 //                //Valid On-Hit
 //                if ((!(event.getEntity() instanceof Player) || !((Player) event.getEntity()).isBlocking())) {
-//                    if (hasPlayerEffect(player, com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.Attributes.CustomEffects.ONHITPOISON)) {
+//                    if (hasPlayerEffect(player, com.Arhke.ArhkeLib.ItemUtil.CustomItem.Attributes.CustomEffects.ONHITPOISON)) {
 //                        le.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 60, 1, false, false));
 //                    }
-//                    if (hasPlayerEffect(player, com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.Attributes.CustomEffects.ONHITSLOW)) {
+//                    if (hasPlayerEffect(player, com.Arhke.ArhkeLib.ItemUtil.CustomItem.Attributes.CustomEffects.ONHITSLOW)) {
 //                        le.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 60, 1, false, false));
 //                    }
-//                    if (hasPlayerEffect(player, com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.Attributes.CustomEffects.ONHITWITHER)) {
+//                    if (hasPlayerEffect(player, com.Arhke.ArhkeLib.ItemUtil.CustomItem.Attributes.CustomEffects.ONHITWITHER)) {
 //                        le.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 90, 1, false, false));
 //                    }
-//                    if (hasPlayerEffect(player, com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.Attributes.CustomEffects.ONHITWEAKNESS)) {
+//                    if (hasPlayerEffect(player, com.Arhke.ArhkeLib.ItemUtil.CustomItem.Attributes.CustomEffects.ONHITWEAKNESS)) {
 //                        le.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 60, 0, false, false));
 //                    }
-//                    if (hasPlayerEffect(player, com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.Attributes.CustomEffects.ONHITBLIND)) {
+//                    if (hasPlayerEffect(player, com.Arhke.ArhkeLib.ItemUtil.CustomItem.Attributes.CustomEffects.ONHITBLIND)) {
 //                        le.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 60, 0, false, false));
 //                    }
-//                    if (hasPlayerEffect(player, com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.Attributes.CustomEffects.ONHITHUNGER)) {
+//                    if (hasPlayerEffect(player, com.Arhke.ArhkeLib.ItemUtil.CustomItem.Attributes.CustomEffects.ONHITHUNGER)) {
 //                        le.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, 60, 5, false, false));
 //                    }
-//                    if (hasPlayerEffect(player, com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.Attributes.CustomEffects.ONHITABSORPTION)) {
+//                    if (hasPlayerEffect(player, com.Arhke.ArhkeLib.ItemUtil.CustomItem.Attributes.CustomEffects.ONHITABSORPTION)) {
 //                        player.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 60,0));
 //                    }
-//                    if (hasPlayerEffect(player, com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.Attributes.CustomEffects.ONHITCLEANSER)) {
+//                    if (hasPlayerEffect(player, com.Arhke.ArhkeLib.ItemUtil.CustomItem.Attributes.CustomEffects.ONHITCLEANSER)) {
 //                        le.removePotionEffect(PotionEffectType.FIRE_RESISTANCE);
 //                        le.removePotionEffect(PotionEffectType.DAMAGE_RESISTANCE);
 //                        le.removePotionEffect(PotionEffectType.INCREASE_DAMAGE);
@@ -141,19 +92,19 @@ import java.util.Objects;
 //                        le.removePotionEffect(PotionEffectType.JUMP);
 //                        le.removePotionEffect(PotionEffectType.NIGHT_VISION);
 //                    }
-//                    if (hasPlayerEffect(player, com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.Attributes.CustomEffects.ANTIHEAL1)) {
+//                    if (hasPlayerEffect(player, com.Arhke.ArhkeLib.ItemUtil.CustomItem.Attributes.CustomEffects.ANTIHEAL1)) {
 //                        le.addPotionEffect(new PotionEffect(PotionEffectType.WATER_BREATHING, 120, 0, false, false));
 //                    }
-//                    if (hasPlayerEffect(player, com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.Attributes.CustomEffects.ANTIHEAL2)) {
+//                    if (hasPlayerEffect(player, com.Arhke.ArhkeLib.ItemUtil.CustomItem.Attributes.CustomEffects.ANTIHEAL2)) {
 //                        le.addPotionEffect(new PotionEffect(PotionEffectType.WATER_BREATHING, 120, 1, false, false));
 //                    }
-//                    if (hasPlayerEffect(player, com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.Attributes.CustomEffects.ANTIHEAL3)) {
+//                    if (hasPlayerEffect(player, com.Arhke.ArhkeLib.ItemUtil.CustomItem.Attributes.CustomEffects.ANTIHEAL3)) {
 //                        le.addPotionEffect(new PotionEffect(PotionEffectType.WATER_BREATHING, 120, 2, false, false));
 //                    }
-//                    if (hasPlayerEffect(player, com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.Attributes.CustomEffects.ANTIHEAL4)) {
+//                    if (hasPlayerEffect(player, com.Arhke.ArhkeLib.ItemUtil.CustomItem.Attributes.CustomEffects.ANTIHEAL4)) {
 //                        le.addPotionEffect(new PotionEffect(PotionEffectType.WATER_BREATHING, 120, 3, false, false));
 //                    }
-//                    if (hasPlayerEffect(player, com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.Attributes.CustomEffects.ONHITHEAL)) {
+//                    if (hasPlayerEffect(player, com.Arhke.ArhkeLib.ItemUtil.CustomItem.Attributes.CustomEffects.ONHITHEAL)) {
 //                        EntityRegainHealthEvent ere = new EntityRegainHealthEvent(player, 1d, EntityRegainHealthEvent.RegainReason.CUSTOM);
 //                        Bukkit.getPluginManager().callEvent(ere);
 //                        if (!ere.isCancelled())
@@ -161,7 +112,7 @@ import java.util.Objects;
 //                    }
 //                    //CRIT
 //                    if (player.getFallDistance() > 0.0F && !player.hasPotionEffect(PotionEffectType.BLINDNESS)) {
-//                        event.setDamage(Math.max(0.01, event.getDamage() + com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.ArmorTags.getPlayerAttribute(player, com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.Attributes.CustomAttributes.CRITDMG)));
+//                        event.setDamage(Math.max(0.01, event.getDamage() + com.Arhke.ArhkeLib.ItemUtil.CustomItem.ArmorTags.getPlayerAttribute(player, com.Arhke.ArhkeLib.ItemUtil.CustomItem.Attributes.CustomAttributes.CRITDMG)));
 //                    }
 //                }
 //                double damage = event.getDamage();
@@ -169,28 +120,28 @@ import java.util.Objects;
 //                double toughness = Objects.requireNonNull(le.getAttribute(Attribute.GENERIC_ARMOR_TOUGHNESS)).getValue();
 //                damage *= (1f - Math.min(Math.max((damage * toughness - 120) / (damage * toughness + 0.0000001), 0f), 0.8f));
 //                //physical
-//                double val = (1 + com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.ArmorTags.getPlayerAttribute(player, com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.Attributes.CustomAttributes.PHYSDMG)) * damage;
+//                double val = (1 + com.Arhke.ArhkeLib.ItemUtil.CustomItem.ArmorTags.getPlayerAttribute(player, com.Arhke.ArhkeLib.ItemUtil.CustomItem.Attributes.CustomAttributes.PHYSDMG)) * damage;
 //                event.setDamage(val);
 //                //blast
-//                val = com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.ArmorTags.getPlayerAttribute(player, com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.Attributes.CustomAttributes.BLASTDMG) * damage;
+//                val = com.Arhke.ArhkeLib.ItemUtil.CustomItem.ArmorTags.getPlayerAttribute(player, com.Arhke.ArhkeLib.ItemUtil.CustomItem.Attributes.CustomAttributes.BLASTDMG) * damage;
 //                val = CustomProtectionCalculation.customDamageReduction(EntityDamageEvent.DamageCause.ENTITY_EXPLOSION, le, val);
 //                event.setDamage(EntityDamageEvent.DamageModifier.BASE, val + event.getDamage(EntityDamageEvent.DamageModifier.BASE));
 //                //Proj
-//                val = com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.ArmorTags.getPlayerAttribute(player, com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.Attributes.CustomAttributes.PROJDMG) * damage;
+//                val = com.Arhke.ArhkeLib.ItemUtil.CustomItem.ArmorTags.getPlayerAttribute(player, com.Arhke.ArhkeLib.ItemUtil.CustomItem.Attributes.CustomAttributes.PROJDMG) * damage;
 //                val = CustomProtectionCalculation.customDamageReduction(EntityDamageEvent.DamageCause.PROJECTILE, le, val);
 //                event.setDamage(EntityDamageEvent.DamageModifier.BASE, val + event.getDamage(EntityDamageEvent.DamageModifier.BASE));
 //                //Fire
-//                val = com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.ArmorTags.getPlayerAttribute(player, com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.Attributes.CustomAttributes.FIREDMG) * damage;
+//                val = com.Arhke.ArhkeLib.ItemUtil.CustomItem.ArmorTags.getPlayerAttribute(player, com.Arhke.ArhkeLib.ItemUtil.CustomItem.Attributes.CustomAttributes.FIREDMG) * damage;
 //                val = CustomProtectionCalculation.customDamageReduction(EntityDamageEvent.DamageCause.FIRE, le, val);
 //                event.setDamage(EntityDamageEvent.DamageModifier.BASE, val + event.getDamage(EntityDamageEvent.DamageModifier.BASE));
 //                //Magic
-//                val = com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.ArmorTags.getPlayerAttribute(player, com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.Attributes.CustomAttributes.MAGICDMG) * damage;
+//                val = com.Arhke.ArhkeLib.ItemUtil.CustomItem.ArmorTags.getPlayerAttribute(player, com.Arhke.ArhkeLib.ItemUtil.CustomItem.Attributes.CustomAttributes.MAGICDMG) * damage;
 //                val = CustomProtectionCalculation.customDamageReduction(EntityDamageEvent.DamageCause.MAGIC, le, val);
 //                if (le instanceof Player)
-//                    val = val * (1 - Math.min(1, com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.ArmorTags.getPlayerAttribute((Player) le, com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.Attributes.CustomAttributes.MAGICRESIST)));
+//                    val = val * (1 - Math.min(1, com.Arhke.ArhkeLib.ItemUtil.CustomItem.ArmorTags.getPlayerAttribute((Player) le, com.Arhke.ArhkeLib.ItemUtil.CustomItem.Attributes.CustomAttributes.MAGICRESIST)));
 //                event.setDamage(EntityDamageEvent.DamageModifier.BASE, val + event.getDamage(EntityDamageEvent.DamageModifier.BASE));
 //                if (event.getFinalDamage() != 0) {
-//                    double value = com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.ArmorTags.getPlayerAttribute(player, com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.Attributes.CustomAttributes.LIFESTEAL);
+//                    double value = com.Arhke.ArhkeLib.ItemUtil.CustomItem.ArmorTags.getPlayerAttribute(player, com.Arhke.ArhkeLib.ItemUtil.CustomItem.Attributes.CustomAttributes.LIFESTEAL);
 //                    if (value != 0) {
 //                        EntityRegainHealthEvent ere = new EntityRegainHealthEvent(player, event.getFinalDamage() * value, EntityRegainHealthEvent.RegainReason.CUSTOM);
 //                        Bukkit.getPluginManager().callEvent(ere);
@@ -213,39 +164,39 @@ import java.util.Objects;
 //        if (event.getEntity() instanceof Player && event.getCause() != EntityPotionEffectEvent.Cause.COMMAND) {
 //            Player p = (Player) event.getEntity();
 //            if (event.getNewEffect() != null) {
-//                if (event.getModifiedType().equals(PotionEffectType.POISON) && hasPlayerEffect(p, com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.Attributes.CustomEffects.POISONRESISTANCE)) {
+//                if (event.getModifiedType().equals(PotionEffectType.POISON) && hasPlayerEffect(p, com.Arhke.ArhkeLib.ItemUtil.CustomItem.Attributes.CustomEffects.POISONRESISTANCE)) {
 //                    event.setCancelled(true);
 //                    return;
 //                }
-//                if (event.getModifiedType().equals(PotionEffectType.WITHER) && hasPlayerEffect(p, com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.Attributes.CustomEffects.WITHERRESISTANCE)) {
+//                if (event.getModifiedType().equals(PotionEffectType.WITHER) && hasPlayerEffect(p, com.Arhke.ArhkeLib.ItemUtil.CustomItem.Attributes.CustomEffects.WITHERRESISTANCE)) {
 //                    event.setCancelled(true);
 //                    return;
 //                }
-//                if (event.getModifiedType().equals(PotionEffectType.WATER_BREATHING) && hasPlayerEffect(p, com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.Attributes.CustomEffects.ANTIHEALRESISTANCE)) {
+//                if (event.getModifiedType().equals(PotionEffectType.WATER_BREATHING) && hasPlayerEffect(p, com.Arhke.ArhkeLib.ItemUtil.CustomItem.Attributes.CustomEffects.ANTIHEALRESISTANCE)) {
 //                    event.setCancelled(true);
 //                    return;
 //                }
-//                if (event.getModifiedType().equals(PotionEffectType.WEAKNESS) && hasPlayerEffect(p, com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.Attributes.CustomEffects.WEAKNESSRESISTANCE)) {
+//                if (event.getModifiedType().equals(PotionEffectType.WEAKNESS) && hasPlayerEffect(p, com.Arhke.ArhkeLib.ItemUtil.CustomItem.Attributes.CustomEffects.WEAKNESSRESISTANCE)) {
 //                    event.setCancelled(true);
 //                    return;
 //                }
-//                if (event.getModifiedType().equals(PotionEffectType.SLOW) && hasPlayerEffect(p, com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.Attributes.CustomEffects.SLOWRESISTANCE)) {
+//                if (event.getModifiedType().equals(PotionEffectType.SLOW) && hasPlayerEffect(p, com.Arhke.ArhkeLib.ItemUtil.CustomItem.Attributes.CustomEffects.SLOWRESISTANCE)) {
 //                    event.setCancelled(true);
 //                    return;
 //                }
-//                if (event.getModifiedType().equals(PotionEffectType.HUNGER) && hasPlayerEffect(p, com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.Attributes.CustomEffects.HUNGERRESISTANCE)) {
+//                if (event.getModifiedType().equals(PotionEffectType.HUNGER) && hasPlayerEffect(p, com.Arhke.ArhkeLib.ItemUtil.CustomItem.Attributes.CustomEffects.HUNGERRESISTANCE)) {
 //                    event.setCancelled(true);
 //                    return;
 //                }
-//                if (event.getModifiedType().equals(PotionEffectType.BLINDNESS) && hasPlayerEffect(p, com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.Attributes.CustomEffects.BLINDRESISTANCE)) {
+//                if (event.getModifiedType().equals(PotionEffectType.BLINDNESS) && hasPlayerEffect(p, com.Arhke.ArhkeLib.ItemUtil.CustomItem.Attributes.CustomEffects.BLINDRESISTANCE)) {
 //                    event.setCancelled(true);
 //                    return;
 //                }
-//                if (event.getModifiedType().equals(PotionEffectType.SLOW_DIGGING) && hasPlayerEffect(p, com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.Attributes.CustomEffects.FATIGUERESISTANCE)) {
+//                if (event.getModifiedType().equals(PotionEffectType.SLOW_DIGGING) && hasPlayerEffect(p, com.Arhke.ArhkeLib.ItemUtil.CustomItem.Attributes.CustomEffects.FATIGUERESISTANCE)) {
 //                    event.setCancelled(true);
 //                    return;
 //                }
-//                if (event.getModifiedType().equals(PotionEffectType.CONFUSION) && hasPlayerEffect(p, com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.Attributes.CustomEffects.CONFUSIONRESISTANCE)) {
+//                if (event.getModifiedType().equals(PotionEffectType.CONFUSION) && hasPlayerEffect(p, com.Arhke.ArhkeLib.ItemUtil.CustomItem.Attributes.CustomEffects.CONFUSIONRESISTANCE)) {
 //                    event.setCancelled(true);
 //                    return;
 //                }
@@ -264,9 +215,9 @@ import java.util.Objects;
 //        newItem.setAmount(1);
 //        NBTItem nbtiCurrent = new NBTItem(newItem);
 //        NBTItem nbtiCursor = new NBTItem(cursor);
-//        if (!com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.ArmorTags.isAccessory(nbtiCursor) || !com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.ArmorTags.canAttach(nbtiCurrent))
+//        if (!com.Arhke.ArhkeLib.ItemUtil.CustomItem.ArmorTags.isAccessory(nbtiCursor) || !com.Arhke.ArhkeLib.ItemUtil.CustomItem.ArmorTags.canAttach(nbtiCurrent))
 //            return;
-//        com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.ArmorTags at = new com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.ArmorTags(nbtiCurrent);
+//        com.Arhke.ArhkeLib.ItemUtil.CustomItem.ArmorTags at = new com.Arhke.ArhkeLib.ItemUtil.CustomItem.ArmorTags(nbtiCurrent);
 //        at.addAccessory(nbtiCursor, EquipmentType.getEquipmentType(current.getType()).getSlot());
 //        Base.itemAmountMinus(cursor);
 //        Base.itemAmountMinus(current);
@@ -297,7 +248,7 @@ import java.util.Objects;
 //                    healRedux = 0.0d;
 //                }
 //            }
-//            event.setAmount(healRedux * event.getAmount() * (1 + Math.max(-1, com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.ArmorTags.getPlayerAttribute(p, com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.Attributes.CustomAttributes.HEALING))));
+//            event.setAmount(healRedux * event.getAmount() * (1 + Math.max(-1, com.Arhke.ArhkeLib.ItemUtil.CustomItem.ArmorTags.getPlayerAttribute(p, com.Arhke.ArhkeLib.ItemUtil.CustomItem.Attributes.CustomAttributes.HEALING))));
 //        }
 //    }
 //
@@ -307,7 +258,7 @@ import java.util.Objects;
 //            Player p = (Player) event.getEntity();
 //            int change = p.getFoodLevel() - event.getFoodLevel();
 //            if (change <= 0) return;
-//            double value = com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.ArmorTags.getPlayerAttribute(p, com.Arhke.ArhkeLib.Lib.ItemUtil.CustomItem.Attributes.CustomAttributes.HUNGER);
+//            double value = com.Arhke.ArhkeLib.ItemUtil.CustomItem.ArmorTags.getPlayerAttribute(p, com.Arhke.ArhkeLib.ItemUtil.CustomItem.Attributes.CustomAttributes.HUNGER);
 //            value = change * Math.max(0.0d, 1d - value);
 //            change = (int) value;
 //            if (Math.random() < value) {

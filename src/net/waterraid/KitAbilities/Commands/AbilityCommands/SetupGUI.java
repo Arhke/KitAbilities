@@ -1,6 +1,9 @@
 package net.waterraid.KitAbilities.Commands.AbilityCommands;
 
-import com.Arhke.ArhkeLib.Lib.GUI.InventoryGui;
+import com.Arhke.ArhkeLib.GUI.InventoryGui;
+import com.Arhke.ArhkeLib.ItemUtil.CustomItem.ArmorTags;
+import com.Arhke.ArhkeLib.ItemUtil.CustomItem.Attributes;
+import net.waterraid.KitAbilities.Armor.Armor;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -17,9 +20,19 @@ public class SetupGUI extends InventoryGui {
         setColor(cp, Color.WHITE);
         setColor(lg, Color.WHITE);
         setColor(bt, Color.WHITE);
+        ArmorTags at = new ArmorTags(cp);
+        at.applyTag(Attributes.MCAttributes.ARMOR, ArmorTags.Slot.CHESTPLATE, ArmorTags.Operations.ADD, 5);
+        cp = at.getItem();
+        at = new ArmorTags(lg);
+        at.applyTag(Attributes.MCAttributes.ARMOR, ArmorTags.Slot.LEGGINGS, ArmorTags.Operations.ADD, 5);
+        lg = at.getItem();
+        at = new ArmorTags(bt);
+        at.applyTag(Attributes.MCAttributes.ARMOR, ArmorTags.Slot.BOOTS, ArmorTags.Operations.ADD, 5);
+        bt = at.getItem();
     }
-    public SetupGUI() {
-        super(5, "Setup");
+    public SetupGUI(Player player) {
+
+        super(5, "Setup", player);
     }
 
     @Override
@@ -28,6 +41,7 @@ public class SetupGUI extends InventoryGui {
         setItem(29, new ItemStack(Material.IRON_SWORD));;
         setItem(30, getPlugin().getPDManager().getOrNewData(player.getUniqueId()).getAbilityKit().getItemStack(), (a)->{
             //open ability select GUI
+            getPlugin().getGUIManager().openGUI(player, new AbilitySelectGUI(player));
         });
         setItem(16, new ItemStack(cp));
         setItem(25, new ItemStack(lg));

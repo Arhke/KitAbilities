@@ -1,6 +1,6 @@
 package net.waterraid.KitAbilities.Utils;
 
-import com.Arhke.ArhkeLib.Lib.CustomEvents.ArmorType;
+import com.Arhke.ArhkeLib.CustomEvents.ArmorType;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;

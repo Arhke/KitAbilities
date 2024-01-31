@@ -1,6 +1,6 @@
 package net.waterraid.KitAbilities.Abilities;
 
-import com.Arhke.ArhkeLib.Lib.Base.Base;
+import com.Arhke.ArhkeLib.Base.Base;
 import net.minecraft.server.v1_8_R3.EnumParticle;
 import net.minecraft.server.v1_8_R3.PacketPlayOutWorldParticles;
 import net.waterraid.KitAbilities.Abilities.Templates.Abilities;

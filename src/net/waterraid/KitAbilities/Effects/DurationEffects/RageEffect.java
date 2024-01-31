@@ -10,7 +10,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import static com.Arhke.ArhkeLib.Lib.Base.Base.trueDamage;
+import static com.Arhke.ArhkeLib.Base.Base.trueDamage;
 import static net.waterraid.KitAbilities.Abilities.Clone.isTargeteableLivingEntity;
 import static net.waterraid.KitAbilities.Abilities.Clone.secondsToTicks;
 

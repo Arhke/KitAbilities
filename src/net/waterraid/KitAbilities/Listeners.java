@@ -1,10 +1,12 @@
 package net.waterraid.KitAbilities;
 
-import com.Arhke.ArhkeLib.Lib.Base.Base;
-import com.Arhke.ArhkeLib.Lib.CustomEvents.ArmorEquipEvent1_8;
-import com.Arhke.ArhkeLib.Lib.CustomEvents.ArmorType;
-import com.Arhke.ArhkeLib.Lib.CustomEvents.TrueDamageEvent;
-import com.Arhke.ArhkeLib.Lib.FileIO.DataManager;
+import com.Arhke.ArhkeLib.Base.Base;
+import com.Arhke.ArhkeLib.CustomEvents.ArmorEquipEvent1_8;
+import com.Arhke.ArhkeLib.CustomEvents.ArmorType;
+import com.Arhke.ArhkeLib.CustomEvents.TrueDamageEvent;
+import com.Arhke.ArhkeLib.FileIO.DataManager;
+import com.Arhke.ArhkeLib.ItemUtil.CustomItem.ArmorTags;
+import com.Arhke.ArhkeLib.ItemUtil.CustomItem.Attributes;
 import com.sk89q.worldguard.bukkit.WGBukkit;
 import de.tr7zw.nbtapi.NBTItem;
 import me.neznamy.tab.shared.Shared;
@@ -49,7 +51,7 @@ import org.bukkit.util.Vector;
 
 import java.util.*;
 
-import static com.Arhke.ArhkeLib.Lib.Base.Base.tcm;
+import static com.Arhke.ArhkeLib.Base.Base.tcm;
 
 @SuppressWarnings("unused")
 public class Listeners implements Listener {
@@ -795,7 +797,7 @@ public class Listeners implements Listener {
         }
         NBTItem nbti = new NBTItem(is);
         ArmorTags at = new ArmorTags(nbti);
-        at.applyTag(Attributes.MCAttributes.MAXHEALTH, ArmorTags.Operations.ADD, 1);
+//        at.applyTag(Attributes.MCAttributes.MAXHEALTH, ArmorTags.Operations.ADD, ArmorTags.Slot.BOOTS, 1);
         is.setItemMeta(at.getItem().getItemMeta());
     }
 }

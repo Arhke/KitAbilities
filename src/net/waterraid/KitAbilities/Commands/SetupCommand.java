@@ -1,7 +1,7 @@
 package net.waterraid.KitAbilities.Commands;
 
-import com.Arhke.ArhkeLib.Lib.Base.CommandsBase;
-import com.Arhke.ArhkeLib.Lib.FileIO.ConfigManager;
+import com.Arhke.ArhkeLib.Base.CommandsBase;
+import com.Arhke.ArhkeLib.FileIO.ConfigManager;
 import net.waterraid.KitAbilities.Abilities.Templates.Abilities;
 import net.waterraid.KitAbilities.Commands.AbilityCommands.SetupGUI;
 import net.waterraid.KitAbilities.Managers.PlayerData;
@@ -28,7 +28,7 @@ public class SetupCommand extends CommandsBase {
         if(!(commandSender instanceof Player)){
             return false;
         }
-        getPlugin().getGUIManager().openGUI((Player)commandSender, new SetupGUI());
+        getPlugin().getGUIManager().openGUI((Player)commandSender, new SetupGUI((Player)commandSender));
         return true;
     }
 }

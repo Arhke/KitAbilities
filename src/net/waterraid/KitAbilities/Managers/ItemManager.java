@@ -1,6 +1,6 @@
 package net.waterraid.KitAbilities.Managers;
 
-import com.Arhke.ArhkeLib.Lib.FileIO.ConfigManager;
+import com.Arhke.ArhkeLib.FileIO.ConfigManager;
 import de.tr7zw.nbtapi.NBTItem;
 import org.bukkit.inventory.ItemStack;
 

@@ -9,8 +9,8 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
-import static com.Arhke.ArhkeLib.Lib.Base.Base.tcm;
-import static com.Arhke.ArhkeLib.Lib.Base.Base.trueDamage;
+import static com.Arhke.ArhkeLib.Base.Base.tcm;
+import static com.Arhke.ArhkeLib.Base.Base.trueDamage;
 import static net.waterraid.KitAbilities.Abilities.Clone.isTargeteableLivingEntity;
 import static net.waterraid.KitAbilities.Main.getPlugin;
 
